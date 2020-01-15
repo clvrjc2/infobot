@@ -10,7 +10,7 @@ import json
 import pickle
 import os
 path = os.path.dirname(os.path.abspath(__file__))
-with open(path+"/symptoms.json",'r') as file:
+with open(path+"/intents.json",'r') as file:
 	data = json.load(file)
 
 try:
@@ -95,7 +95,6 @@ def nlp(inp):
 		for tg in data["intents"]:
 			if tg['tag'] == tag:
 				responses = tg['responses']
-		print(responses)
 		return random.choice(responses)
 	else:
 		return "Invalid"
