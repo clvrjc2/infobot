@@ -1,0 +1,83 @@
+{"intents": [
+        {"tag": "course offer",
+         "patterns": ["what course do you offer","what programs do you offer","What is the courses available","courses"],
+         "responses": ["course offer"],
+         "context_set": ""
+        },
+        {"tag": "class schedule",
+         "patterns": ["can you give me my schedule", "send me my schedule", "class schedule","schedule"],
+         "responses": ["class schedule"],
+         "context_set": ""
+        },
+        {"tag": "accounting slip",
+         "patterns": ["can you give me my accounting sleep", "send me my accounting slip", "accounting slip","slip"],
+         "responses": ["accounting slip"],
+         "context_set": ""
+        },
+        {"tag": "balance payable",
+         "patterns": ["can you give me my balance payable", "send me my balance payable", "balance payable","balance"],
+         "responses": ["balance payable"],
+         "context_set": ""
+        },
+        {"tag": "organizational chart",
+         "patterns": ["can you give me the organizational chart", "send me the organizational chart", "organizational chart"],
+         "responses": ["organizational chart"],
+         "context_set": ""
+        },
+        {"tag": "owner",
+         "patterns": ["who is the owner of aclc butuan"],
+         "responses": ["owner"],
+         "context_set": ""
+        },
+        {"tag": "enrollment requirements",
+         "patterns": ["what should I bring during enrollment","what are the enrollment requirements","requirements for enrollment","requirements"],
+         "responses": ["enrollment requirements"],
+         "context_set": ""
+        },
+        {"tag": "tesda programs",
+         "patterns": ["do you have tesda courses", "do you have tesda programs","what is your tesda programs"],
+         "responses": ["tesda programs"],
+         "context_set": ""
+        },
+        {"tag": "enrollment fee",
+         "patterns": ["How much is the enrollment fee", "enrollment fee", "enrollment cost"],
+         "responses": ["enrollment fee"],
+         "context_set": ""
+        },
+        {"tag": "tuition fee",
+         "patterns": ["how much is tuition fee", "tuition fee", "tuition cost"],
+         "responses": ["tuition fee"],
+         "context_set": ""
+        },
+        {"tag": "cost per unit",
+         "patterns": ["how much is per unit cost", "per unit"],
+         "responses": ["per unit"],
+         "context_set": ""
+        },
+        {"tag": "semester",
+         "patterns": ["how many semester"],
+         "responses": ["semester"],
+         "context_set": ""
+        },
+        {"tag": "ACLC",
+         "patterns": ["what is ACLC", "what is aclc butuan"],
+         "responses": ["aclc"],
+         "context_set": ""
+        },
+        {"tag": "enrollment flow",
+         "patterns": ["enrollment flow", "what is the enrollment flow", "can you give me the enrollment flow"],
+         "responses": ["enrollment flow"],
+         "context_set": ""
+        },
+        {"tag": "location",
+         "patterns": ["where are you located", "location", "address"],
+         "responses": ["location"],
+         "context_set": ""
+        },
+        {"tag": "ama hymn",
+         "patterns": ["can you give me the lyrics of ama hymn", "ama hymn"],
+         "responses": ["ama hymn"],
+         "context_set": ""
+        }
+   ]
+}
