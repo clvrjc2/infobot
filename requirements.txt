@@ -1,4 +1,8 @@
-Flask==0.12.2
-pymessenger==0.0.7.0
+Flask==1.0
 gunicorn==19.6.0
-fbmq
+pymongo[srv]
+nltk
+numpy
+tflearn
+tensorflow
+counter
