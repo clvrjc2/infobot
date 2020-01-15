@@ -9,6 +9,7 @@ from pymongo import MongoClient
 import Mongo#import Mongo.py
 from NLU import nlp
 from collections import Counter #install collections
+import datetime
 #Libraries to be import END
 
 app = Flask(__name__)
@@ -21,13 +22,17 @@ cluster = MongoClient(MONGO_TOKEN)
 db = cluster["ACLC"]
 users = db["users"]
 student = db["student"]
+account_slip = db["accountslip"]
 enrollment = db["enrollment"]
 employee = db["employee"]
 exam = db["examschedule"]
 schedule = db["myschedule"]
 programs = db["programs"]
 scholarship = db["scholarship"]
-		
+
+now = datetime.now()
+d = datetime.datetime.strptime(now, "%d %b %Y  %H:%M:%S.%f")
+
 image_url = 'https://raw.githubusercontent.com/clvrjc2/drpedia/master/images/'
 GREETING_RESPONSES = ["Hi", "Hey", "Hello there", "Hello", "Hi there"]
 #enrollment
@@ -47,6 +52,7 @@ ename = ''
 department = ''
 designation = ''
 #users
+std_id = ''
 ask = ''
 answer = ''
 #student
@@ -83,6 +89,7 @@ proctor = ''
 sy = ''
 sem = ''
 #scholarship
+screq = ''
 sname = ''
 sdescription = ''
 sstatus = ''
@@ -151,12 +158,12 @@ def received_text(event):
 	'''
 	global schedules, frequirements, ffee, fflow,trequirements, tfee, tflow,orequirements, ofee, oflow,category#enrollment    
 	global eid, ename, department,designation#employee
-	global ask,answer #users
+	global ask,answer,std_id #users
 	global name, guardian, contact, address, email #student
 	global subject, day, time, room, unit, instructor,sy,sem #schedule
 	global sy, sem, prelim, midterm, prefinal, final, amount_paid,balance, old_account  #account
 	global subject, day, time, room, unit, proctor,sy,sem    #exam
-	global sname,description,status #scholarship
+	global sname,description,status, sreq #scholarship
 	global pame,description,department,status #programs SIS TESDA SENIOR HIGH
 	#users
 	user_data = Mongo.get_data_users(users, sender_id)
@@ -272,13 +279,14 @@ def received_qr(event):
 	'''
 	global schedules, frequirements, ffee, fflow,trequirements, tfee, tflow,orequirements, ofee, oflow, category#enrollment    
 	global eid, ename, department,designation#employee
-	global ask,answer #users
+	global ask,answer,std_id #users
 	global name, guardian, contact, address, email #student
 	global subject, day, time, room, unit, instructor,sy,sem #schedule
 	global sy, sem, prelim, midterm, prefinal, final, amount_paid,balance, old_account  #account
 	global subject, day, time, room, unit, proctor,sy,sem    #exam
-	global sname,description,status #scholarship
+	global sname,description,status,sreq #scholarship
 	global pame,description,department,status #programs SIS TESDA SENIOR HIGH
+	
 	#users
 	user_data = Mongo.get_data_users(users, sender_id)
 	if user_data !=None:
@@ -338,12 +346,67 @@ def received_qr(event):
 		
 	if text == 'schedule':
 		Mongo.set_column(users, sender_id,'last_message_answer', 'schedule')
-		quick_replies = {"content_type":"text","title":"Freshmen","payload":"freshmen"},{"content_type":"text","title":"Transferee","payload":"transferee"},{"content_type":"text","title":"Old Student","payload":"old"}
-		bot.send_quick_replies_message(sender_id, 'Requirements for ?', quick_replies)
+		quick_replies = {"content_type":"text","title":"Current","payload":"current"},{"content_type":"text","title":"Previous","payload":"previous"}
+		bot.send_quick_replies_message(sender_id, 'What schedule?', quick_replies)
+	
+	if text == 'previous':
+		bot.send_text_message(sender_id,'Under Development')
+	if text == 'current':
+		if d.month in range(1,7):
+			prev = d.year - 1
+			sy = "{}-{}".format(prev,d.year)
+			sem = '2nd'
+		else:
+			nex = d.year + 1
+			sy = "{}-{}".format(d.year,nex)
+			sem = '2nd'
+		sched = Mongo.get_schedule(schedule, sy, sem,std_id)
+		if sched !=None:
+			for data in sched:
+				a = data["subject"]+" "+data["time"]+" "+data["day"] +" "+data["room"]+" "+data["instructor"]
+				bot.send_text_message(sender_id,"* {}".format(a))
+		else: 
+			pass
+		
 	if text == 'account_slip':
-		pass
+		Mongo.set_column(users, sender_id,'last_message_answer', 'account_slip')
+		quick_replies = {"content_type":"text","title":"Current","payload":"current_a"},{"content_type":"text","title":"Previous","payload":"previous_a"}
+		bot.send_quick_replies_message(sender_id, 'What account slip?', quick_replies)
+	if text == 'previous_a':
+		bot.send_text_message(sender_id,'Under Development')
+	if text == 'current_a':
+		if d.month in range(1,7):
+			prev = d.year - 1
+			sy = "{}-{}".format(prev,d.year)
+			sem = '2nd'
+		else:
+			nex = d.year + 1
+			sy = "{}-{}".format(d.year,nex)
+			sem = '2nd'
+		slip = Mongo.get_slip(account_slip, sy, sem,std_id)
+		if slip !=None:
+			bot.send_text_message(sender_id,"ACCOUNT SLIP")
+			for data in slip:
+				bot.send_text_message(sender_id,"Prelim :{}\nMidterm :{}\nPrefinal :{}\nFinal :{}\nTotal :{}\nAmount Paid :{}\nBalance :{}\nOld Account :{}".format(data["prelim"], data["midterm"], data["prefinal"], data["final"], data["total"], data["amount_paid"], data["balance"], data["old_account"]))
+		else: 
+			pass
+		
 	if text == 'exam_schedule':
-		pass
+		if d.month in range(1,7):
+			prev = d.year - 1
+			sy = "{}-{}".format(prev,d.year)
+			sem = '2nd'
+		else:
+			nex = d.year + 1
+			sy = "{}-{}".format(d.year,nex)
+			sem = '2nd'
+		sched = Mongo.get_schedule(schedule, sy, sem,std_id)
+		if sched !=None:
+			for data in sched:
+				a = data["subject"]+" "+data["time"]+" "+data["day"] +" "+data["room"]+" "+data["instructor"]
+				bot.send_text_message(sender_id,"* {}".format(a))
+		else: 
+			pass
 	if text == 'scholarship':
 		pass
 	if text == 'others':
@@ -381,12 +444,12 @@ def received_postback(event):
 	'''
 	global schedules, frequirements, ffee, fflow,trequirements, tfee, tflow,orequirements, ofee, oflow,category#enrollment    
 	global eid, ename, department,designation#employee
-	global ask,answer #users
+	global ask,answer,std_id #users
 	global name, guardian, contact, address, email #student
 	global subject, day, time, room, unit, instructor,sy,sem #schedule
 	global sy, sem, prelim, midterm, prefinal, final, amount_paid,balance, old_account  #account
 	global subject, day, time, room, unit, proctor,sy,sem    #exam
-	global sname,description,status #scholarship
+	global sname,description,status,sreq#scholarship
 	global pame,description,department,status #programs SIS TESDA SENIOR HIGH
 	#users
 	user_data = Mongo.get_data_users(users, sender_id)
