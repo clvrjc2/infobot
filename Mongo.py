@@ -44,6 +44,18 @@ def get_enrollment(table, category):
         return a
     return None
 
+def get_schedule(table, sy, sem, std_id):
+    a = table.find({'std_id':std_id,'sy': sy,'sem':sem})
+    if a != None:
+        return a
+    return None   
+
+def get_slip(table, sy, sem, std_id):
+    a = table.find_one({'std_id':std_id,'sy': sy,'sem':sem})
+    if a != None:
+        return a
+    return None   
+
 def get_data(table, std_id):
     a = table.find({'std_id': std_id})
     if a != None:
@@ -98,6 +110,7 @@ def create_student(student,sender_id,std_id, name, guardian, contact, address, e
 def update_student(student,std_id, name, guardian, contact, address, email):
     student.update({"std_id": std_id},{"$set":{'name': name,'std_id':std_id, 'contact': contact,'address': address,'email': email,'guardian': guardian}})                      
 
+    
 def create_schedule(schedule, std_id, subject, day, time, room, unit, instructor,sy,sem):                     
     insert = { 'std_id': std_id,
                         'subject':std_id,
@@ -111,13 +124,14 @@ def create_schedule(schedule, std_id, subject, day, time, room, unit, instructor
                         }
     schedule.insert(insert)
 
-def create_account(account, std_id, sy, sem, prelim, midterm, prefinal, final, amount_paid,balance, old_account):                     
+def create_account(account, std_id, sy, sem, prelim, midterm, prefinal, final,total, amount_paid,balance, old_account):                     
     insert = { 'std_id': std_id,
                         'subject':std_id,
                         'prelim': prelim,
                         'midterm': midterm,
                         'prefinal': prefinal,
                         'final': final,
+                        'overall_total':total,
                         'amount_paid': amount_paid,
                         'balance': balance,
                         'old_account': sy,
@@ -138,8 +152,8 @@ def create_exam(exam, std_id, subject, day, time, room, proctor,sy,sem):
                         }
     exam.insert(insert)
 
-def create_scholarship(scholarship,name,description,status):                     
-    insert = {      
+def create_scholarship(scholarship,requirements,name,description,status):                     
+    insert = {      'requirements': requirements,
                         'name': name,
                         'description': description,
                         'status': status
