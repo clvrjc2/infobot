@@ -199,7 +199,7 @@ def received_text(event):
 		print('trap is good')
 		if Mongo.student_exists(student, text):
 			print('ok')
-			Mongo.set_column(users, sender_id,'std_id', 'text)
+			Mongo.set_column(users, sender_id,'std_id', text)
 			quick_replies = {"content_type":"text","title":"Enrollment","payload":"enrollment"},{"content_type":"text","title":"Schedule","payload":"schedule"},{"content_type":"text","title":"Account Slip","payload":"account_slip"},{"content_type":"text","title":"Exam Schedule","payload":"exam_schedule"},{"content_type":"text","title":"Scholarship","payload":"scholarship"},{"content_type":"text","title":"Others","payload":"others"}
 			bot.send_quick_replies_message(sender_id, 'What can I do for you?', quick_replies)
 		else:
