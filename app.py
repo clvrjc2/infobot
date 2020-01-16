@@ -232,11 +232,11 @@ def received_text(event):
 		if sched !=None:
 			for x in range(0,sched_count):
 				for data in sched:
-					elements.append(data["subject"]+" "+data["time"]+" "+data["day"] +" "+data["room"]+" "+data["instructor"],)
+					elements.append(data["subject"]+" "+data["time"]+" "+data["day"] +" "+data["room"]+" "+data["instructor"]+"\n")
+					bot.send_text_message(sender_id,"* {}".format(elements[x]))
 					if x == sched_count:
 						break
-				else:
-					bot.send_text_message(sender_id,"* {}".format())
+					
 		else: 
 			pass
 	'''		
@@ -423,7 +423,6 @@ def received_qr(event):
 		if p !=None:
 			for data in p:
 				d = data['description']
-			else:
 				bot.send_text_message(sender_id, "Course : {}".format(d))
 		else: 
 			pass
@@ -434,7 +433,6 @@ def received_qr(event):
 		if i !=None:
 			for data in i:
 				sdes = data['description']
-			else:
 				bot.send_text_message(sender_id, "Course : {}".format(sdes))
 			
 		else: 
@@ -445,7 +443,6 @@ def received_qr(event):
 		if f !=None:
 			for data in f:
 				ftes = data['description']
-			else:
 				bot.send_text_message(sender_id, "Tesda Program : {}".format(ftes))
 		else: 
 			pass
