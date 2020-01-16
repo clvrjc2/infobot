@@ -33,7 +33,7 @@ def create_user(users, sender_id, user_fb):
     users.insert(user_insert)
     
 def get_data_users(table, sender_id):
-    a = table.find_one({'sender_id': sender_id})
+    a = table.find_one({'user_id': sender_id})
     if a != None:
         return a
     return None   
@@ -44,6 +44,11 @@ def get_enrollment(table, category):
         return a
     return None
 
+def get_schedule_count(table, sy, sem, std_id):
+    a = table.find({'std_id':std_id,'sy': sy,'sem':sem}).count()
+    if a != None:
+        return a
+    return None   
 def get_schedule(table, sy, sem, std_id):
     a = table.find({'std_id':std_id,'sy': sy,'sem':sem})
     if a != None:
@@ -126,7 +131,6 @@ def create_schedule(schedule, std_id, subject, day, time, room, unit, instructor
 
 def create_account(account, std_id, sy, sem, prelim, midterm, prefinal, final,total, amount_paid,balance, old_account):                     
     insert = { 'std_id': std_id,
-                        'subject':std_id,
                         'prelim': prelim,
                         'midterm': midterm,
                         'prefinal': prefinal,
