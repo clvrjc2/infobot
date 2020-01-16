@@ -9,7 +9,7 @@ from pymongo import MongoClient
 import Mongo#import Mongo.py
 from nlu import nlp
 from collections import Counter #install collections
-import datetime
+from datetime import datetime
 #Libraries to be import END
 
 app = Flask(__name__)
