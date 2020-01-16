@@ -30,6 +30,30 @@ schedule = db["myschedule"]
 programs = db["programs"]
 scholarship = db["scholarship"]
 
+Mongo.create_student(student,'15001191100', 'Rolando C. Becerro Jr.', 'Lannie C. Becerro', '09101064727', 'Butuan City', 'rcbecerro.aclcbutuan@gmail.com') 
+Mongo.create_schedule(schedule, '15001191100', 'IT Practicum', 'MTH', '8:00 - 12:00', '101', '9', 'Daryll A. Cabagay','2019-2020','2nd')
+Mongo.create_schedule(schedule, '15001191100', 'ITE Professional Ethics', 'TF', '12:30 - 2:00','CL1', '3', 'Junell T. Bujocan','2019-2020','2nd')
+Mongo.create_schedule(schedule, '15001191100', 'Project Management and Quality System', 'TF', '3:30 - 5:00', 'CL4', '3', 'Nino Jabagat','2019-2020','2nd')
+Mongo.create_schedule(schedule, '15001191100', 'Free Elective 3', 'WED', '12:00 - 2:30', 'CL2', '3', 'Daryll A. Cabagay','2019-2020','2nd')
+Mongo.create_schedule(schedule, '15001191100', 'IT Major Elective 4', 'WED', '3:00 - 5:00', 'CL2', '3', 'Daryll A. Cabagay','2019-2020','2nd')
+
+Mongo.create_account(account, '15001191100', '2019-2020','2nd' '8,000.00', '6,000.00', '4,000.00', '4,000.00','20,000.00', '0.00','20,000.00', '0.00')   
+
+Mongo.create_program(programs,'CSS',"Computer System Servicing NCII\nA Tesda's Technical Vocational Course",'tesda','active')
+Mongo.create_program(programs,'ICT',"Information & Communication Technology\nA Tesda's 3 year Course",'tesda','active')
+Mongo.create_program(programs,'TCT',"Computer System Servicing NCII\nA Tesda's 3 year Course",'tesda','active')
+Mongo.create_program(programs,'ComTech',"Computer System Servicing NCII\nA Tesda's 3 year Course",'tesda','active')
+Mongo.create_program(programs,'SADT',"Software Application & Development Technology",'tesda','active')
+Mongo.create_program(programs,'GAS','General Academic Strand','sis','active')
+Mongo.create_program(programs,'STEM','Science, Technology, Engineering, and Mathematics','sis','active')
+Mongo.create_program(programs,'BSIT','Bachelor of Science in Information Technoloy','college','active')
+Mongo.create_program(programs,'BSBA Major in Marketing Management','Bachelor of Science in Business Administration Major in Marketing Management','college','active')
+Mongo.create_program(programs,'BSBA Major in Financial Management','Bachelor of Science in Business Administration Major in Financial Management','college','active')
+Mongo.create_program(programs,'BSCS','Bachelor of Science in Computer Science','college','active')
+Mongo.create_enrollment(enrollment,'January 6 - 10, 2020', 'Form 138(Report Card)\nCertificate of Good Moral Character\n2 photocopies of NSO Birth Certificate\n1Long brown envelope', '1,500.00 - 2,500.00 for tuition fee + 750.00 for SSG Fee', '1st Step: Get a Admision form in Admisson Office','freshmen')
+Mongo.create_enrollment(enrollment,'January 6 - 10, 2020', 'TOR\nHonorable Dismisal\nGood Moral Charachter\n2 photocopies of NSO Birth Certificate', '1,500.00 - 2,500.00 for tuition fee + 750.00 for SSG Fee', '1st Step: Get a Admision form in Admisson Office','transferee')
+Mongo.create_enrollment(enrollment,'January 6 - 10, 2020', 'IF NOT COMPLIED : \nTOR\nForm 138(Report Card)\nCertificate of Good Moral Character\n2 photocopies of NSO Birth Certificate\n1Long brown envelope', '1,500.00 - 2,500.00 for tuition fee + 750.00 for SSG Fee', '1st Step: Get a Admision form in Admisson Office','transferee')
+
 now = datetime.now()
 d = datetime.datetime.strptime(now, "%d %b %Y  %H:%M:%S.%f")
 
@@ -408,9 +432,61 @@ def received_qr(event):
 		else: 
 			pass
 	if text == 'scholarship':
+		#requirements,name,description,status
+		quick_replies = {"content_type":"text","title":"CHED","payload":"ched"},{"content_type":"text","title":"Barangay Scholarship","payload":"brgy"},{"content_type":"text","title":"City Scholarship","payload":"city"},{"content_type":"text","title":"Sports Scholarship","payload":"sports"},{"content_type":"text","title":"Deanslist Program","payload":"deans"},{"content_type":"text","title":"Student Assistant","payload":"sa"}
+		bot.send_quick_replies_message(sender_id, "ACLC Butuan's Scholarship Programs", quick_replies)
+	if text == 'ched':	
+		pass
+	if text == 'brgy':	
+		pass
+	if text == 'city':	
+		pass
+	if text == 'sports':	
+		pass
+	if text == 'sa':	
+		pass
+	if text == 'deans':		
 		pass
 	if text == 'others':
-		pass
+		bot.send_text_message(sender_id, "Simply type it in.")
+	
+	#If not student
+	
+	if text == 'college':
+		bot.send_text_message(sender_id, "These are the following College Courses we offer :")
+		p = Mongo.get_program(programs,'college')
+		if p !=None:
+			for data in p:
+				req = data['requirements']
+				n = data['name']
+				d = data['description']
+				bot.send_text_message(sender_id, "Course : {}\nDescription :{}".format(n,d))
+		else: 
+			pass
+		
+	if text == 'sis':
+		bot.send_text_message(sender_id, "These are the following Senior High Courses we offer :")
+		p = Mongo.get_program(programs,'sis')
+		if p !=None:
+			for data in p:
+				req = data['requirements']
+				n = data['name']
+				d = data['description']
+				bot.send_text_message(sender_id, "Course : {}\nDescription :{}".format(n,d))
+			
+		else: 
+			pass
+	if text == 'tesda':
+		bot.send_text_message(sender_id, "These are the following Tesda Programs we offer :")
+		p = Mongo.get_program(programs,'tesda')
+		if p !=None:
+			for data in p:
+				req = data['requirements']
+				n = data['name']
+				d = data['description']
+				bot.send_text_message(sender_id, "Tesda Program : {}\nDescription :{}".format(n,d))
+		else: 
+			pass
 	
 	if text == 'yes_student':
 		Mongo.set_column(users, sender_id,'last_message_answer', 'yes_student')
@@ -480,18 +556,19 @@ def received_postback(event):
 			
 	#Persistent Menu Buttons        
 	if payload=='start_over':
-		if terms == "Yes":
-			Mongo.set_ask(users,sender_id, "")
-			Mongo.set_answer(users,sender_id, "")
-			quick_replies = {"content_type":"text","title":"Myself","payload":"myself"},{"content_type":"text","title":"My Child","payload":"mychild"},{"content_type":"text","title":"Someone else","payload":"someone"}
-			bot.send_quick_replies_message(sender_id, 'Who do you want to 🔍check symptom, {}?'.format(first_name(sender_id)), quick_replies)
-		elif terms == "No":
-			greet_disclaimer(sender_id)
+		if Mongo.student_enroll(student, sender_id):
+			bot.send_text_message(sender_id, "{} {},Welcome back!".format(greet,first_name(sender_id))))
+			quick_replies = {"content_type":"text","title":"Enrollment","payload":"enrollment"},{"content_type":"text","title":"Schedule","payload":"schedule"},{"content_type":"text","title":"Account Slip","payload":"account_slip"},{"content_type":"text","title":"Exam Schedule","payload":"exam_schedule"},{"content_type":"text","title":"Scholarship","payload":"scholarship"},{"content_type":"text","title":"Others","payload":"others"}
+			bot.send_quick_replies_message(sender_id, 'What can I do for you?', quick_replies)
+		else:
+			bot.send_text_message(sender_id, "{} again {}!".format(greet,first_name(sender_id))))
+			quick_replies = {"content_type":"text","title":"Enrollment","payload":"enrollment"},{"content_type":"text","title":"College Courses","payload":"college"},{"content_type":"text","title":"Senior High","payload":"sis"},{"content_type":"text","title":"Tesda Programs","payload":"tesda"},{"content_type":"text","title":"Scholarship","payload":"scholarship"},{"content_type":"text","title":"Others","payload":"others"}
+			bot.send_quick_replies_message(sender_id, 'What do you want to know?', quick_replies)
 		
-	if payload=='pm_dengue_prevention':
-		bot.send_text_message(sender_id,'Dengue Prevention Under Construction')
-	if payload=='pm_about':
-		bot.send_text_message(sender_id,'About Under Construction')
+	if payload=='pm_call':
+		bot.send_text_message(sender_id,'call')
+	if payload=='pm_admin':
+		bot.send_text_message(sender_id,'Admin')
 	
 	
 
@@ -567,14 +644,6 @@ def init_bot():
 			}
 	bot.set_persistent_menu(pm_menu)
 	
-def greet_disclaimer(sender_id):
-	Mongo.set_ask(users,sender_id, "agree and proceed?")
-	bot.send_text_message(sender_id,"Before we proceed onward, it's time for a brief interruption from my good friends, the lawyers. ⚖️")
-	bot.send_text_message(sender_id,"Remember that DrPedia is just a robot 🤖, not a doctor 👨‍⚕️.")
-	bot.send_text_message(sender_id,"DrPedia is intended for informational purposes only and DrPedia don't attempt to represent a real pediatrician or a doctor in any way.")
-	quick_replies = {"content_type":"text","title":"🤝Agree and proceed", "payload":"yes_agree"},{"content_type":"text","title":"📇See details","payload":"see_details"}
-	bot.send_quick_replies_message(sender_id, "By tapping 'Agree and proceed' you accept DrPedia's Terms of Use and Privacy Policy", quick_replies)
-				
 def verify_fb_token(token_sent):
 	#take token sent by facebook and verify it matches the verify token you sent
 	#if they match, allow the request, else return an error 
