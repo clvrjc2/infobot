@@ -239,45 +239,6 @@ def received_text(event):
 		bot.send_text_message(sender_id,random.choice(x))
 	'''		
 
-def send_remedies(sender_id,symptoms):
-	patient_symptoms = list(symptoms.split(","))
-	len_ps = len(patient_symptoms)
-	elements = []
-	if len_ps > 2:
-		print(len_ps)
-		for x in range(0,len_ps-1):
-			rest = patient_symptoms[x].replace(" ","").replace("/","").replace("-","").replace(",","")
-			elements.append({"title":patient_symptoms[x].capitalize(),"image_url":image_url +rest+'.png',"subtitle":"If symptom persist or worsen get a doctor's consultation.","buttons":[{"type":"postback","title":"More Details","payload":rest+"_about"},{"type":"postback","title":"Remedies","payload":rest+"_remedies"}]},)
-			if x == len_ps-1:
-				break
-		else:
-			bot.send_generic_message(sender_id, elements)
-	elif len(patient_symptoms) == 2:
-		ps = patient_symptoms[0]
-
-		rest = ps.replace(" ","").replace("/","").replace("-","").replace(",","")
-		print(ps,len(patient_symptoms),rest)
-		elements = [
-				 {
-				  "title":ps.capitalize(),
-				  "image_url":image_url +rest+'.png',
-				  "subtitle":"If symptom persist or worsen get a doctor's consultation.",
-				     "buttons":[
-					{
-					"type":"postback",
-					"title":"More Details",
-					"payload":rest+"_about"
-					},
-					 {
-					"type":"postback",
-					"title":"Remedies",
-					"payload":rest+"_remedies"
-					}
-				     ]
-				}
-			      ]
-		bot.send_generic_message(sender_id, elements)
-
 #if user tap a button from a quick reply
 def received_qr(event):
 	sender_id = event["sender"]["id"]        # the facebook ID of the person sending you the message
