@@ -141,7 +141,6 @@ def receive_message():
 			for message in messaging:
 				if message.get('message'):
 					#Facebook Messenger ID for user so we know where to send response back to
-					sender_id = message['sender']['id']
 					if message['message'].get('text'):
 						if message['message'].get('quick_reply'):
 							received_qr(message)  
@@ -196,31 +195,32 @@ def received_text(event):
 	else: 
 		pass
 	print(answer)
-	if answer == 'yes_student':
+	if answer == "yes_student":
 		print('trap is good')
 		if Mongo.student_exists(student, text):
 			print('ok')
+			Mongo.set_column(users, sender_id,'std_id', 'text)
 			quick_replies = {"content_type":"text","title":"Enrollment","payload":"enrollment"},{"content_type":"text","title":"Schedule","payload":"schedule"},{"content_type":"text","title":"Account Slip","payload":"account_slip"},{"content_type":"text","title":"Exam Schedule","payload":"exam_schedule"},{"content_type":"text","title":"Scholarship","payload":"scholarship"},{"content_type":"text","title":"Others","payload":"others"}
 			bot.send_quick_replies_message(sender_id, 'What can I do for you?', quick_replies)
 		else:
 			print('not ok')
 			bot.send_text_message(sender_id,'Invalid ID number, please try again.')
-	if answer == 'enrollment':
+	if answer == "enrollment":
 		bot.send_text_message(sender_id, 'Just click the Send Requirements Button')
 		bot.send_quick_replies_message(sender_id, 'Get Requirements',  [{"content_type":"text","title":"Send Requirements","payload":"requirements"}])
-	if answer == 'requirements':
+	if answer == "requirements":
 		bot.send_text_message(sender_id, 'Simply click the buttons')
 		quick_replies = {"content_type":"text","title":"Freshmen","payload":"freshmen"},{"content_type":"text","title":"Transferee","payload":"transferee"},{"content_type":"text","title":"Old Student","payload":"old"}
 		bot.send_quick_replies_message(sender_id, 'Requirements for ?', quick_replies)
-	if answer == 'freshmen':
+	if answer == "freshmen":
 		bot.send_text_message(sender_id, 'Just click the Send Enrollment Fee Button')
 		bot.send_text_message(sender_id, 'For other matters simply click the start over button in the persistent menu')
 		bot.send_quick_replies_message(sender_id, 'Enrollment Fee?',  [{"content_type":"text","title":"Send Enrollment Fee","payload":"fee"}])
-	if answer == 'transferee':
+	if answer == "transferee":
 		bot.send_text_message(sender_id, 'Just click the Send Enrollment Fee Button')
 		bot.send_text_message(sender_id, 'For other matters simply click the start over button in the persistent menu')
 		bot.send_quick_replies_message(sender_id, 'Enrollment Fee?',  [{"content_type":"text","title":"Send Enrollment Fee","payload":"fee"}])
-	if answer == 'old':
+	if answer == "old":
 		bot.send_text_message(sender_id, 'Just click the Send Enrollment Fee Button')
 		bot.send_text_message(sender_id, 'For other matters simply click the start over button in the persistent menu')
 		bot.send_quick_replies_message(sender_id, 'Enrollment Fee?',  [{"content_type":"text","title":"Send Enrollment Fee","payload":"fee"}])
@@ -519,11 +519,11 @@ def received_postback(event):
 	#Persistent Menu Buttons        
 	if payload=='start_over':
 		if Mongo.student_enroll(student, sender_id):
-			bot.send_text_message(sender_id, "{} {},Welcome back!".format(greet,first_name(sender_id)))
+			bot.send_text_message(sender_id, "Hi {},Welcome back!".format(first_name(sender_id)))
 			quick_replies = {"content_type":"text","title":"Enrollment","payload":"enrollment"},{"content_type":"text","title":"Schedule","payload":"schedule"},{"content_type":"text","title":"Account Slip","payload":"account_slip"},{"content_type":"text","title":"Exam Schedule","payload":"exam_schedule"},{"content_type":"text","title":"Scholarship","payload":"scholarship"},{"content_type":"text","title":"Others","payload":"others"}
 			bot.send_quick_replies_message(sender_id, 'What can I do for you?', quick_replies)
 		else:
-			bot.send_text_message(sender_id, "{} again {}!".format(greet,first_name(sender_id)))
+			bot.send_text_message(sender_id, "Hello again {}!".format(first_name(sender_id)))
 			quick_replies = {"content_type":"text","title":"Enrollment","payload":"enrollment"},{"content_type":"text","title":"College Courses","payload":"college"},{"content_type":"text","title":"Senior High","payload":"sis"},{"content_type":"text","title":"Tesda Programs","payload":"tesda"},{"content_type":"text","title":"Scholarship","payload":"scholarship"},{"content_type":"text","title":"Others","payload":"others"}
 			bot.send_quick_replies_message(sender_id, 'What do you want to know?', quick_replies)
 		
