@@ -151,7 +151,13 @@ def create_exam(exam, std_id, subject, day, time, room, proctor,sy,sem):
                         'sem': sem
                         }
     exam.insert(insert)
-
+    
+def get_scholarship(table):
+    a = table.find({'std_id':'active'})
+    if a != None:
+        return a
+    return None  
+    
 def create_scholarship(scholarship,requirements,name,description,status):                     
     insert = {      'requirements': requirements,
                         'name': name,
