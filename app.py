@@ -195,7 +195,7 @@ def received_text(event):
 		answer = user_data['last_message_answer']
 	else: 
 		pass
-	
+	print(answer)
 	if answer == 'yes_student':
 		print('trap is good')
 		if Mongo.student_exists(student, text):
