@@ -451,8 +451,10 @@ def received_qr(event):
 			pass
 	
 	if text == 'yes_student':
-		Mongo.set_column(users, sender_id,'last_message_answer', 'yes_student')
-		bot.send_text_message(sender_id, "Please enter your student ID number.\nFor Example: 15000011000")
+		#Mongo.set_column(users, sender_id,'last_message_answer', 'yes_student')
+		#bot.send_text_message(sender_id, "Please enter your student ID number.\nFor Example: 15000011000")
+		quick_replies = {"content_type":"text","title":"Enrollment","payload":"enrollment"},{"content_type":"text","title":"Schedule","payload":"schedule"},{"content_type":"text","title":"Account Slip","payload":"account_slip"},{"content_type":"text","title":"Exam Schedule","payload":"exam_schedule"},{"content_type":"text","title":"Scholarship","payload":"scholarship"},{"content_type":"text","title":"Others","payload":"others"}
+		bot.send_quick_replies_message(sender_id, 'What can I do for you?', quick_replies)
 	if text == 'not_student':
 		Mongo.set_column(users, sender_id,'last_message_answer', 'not_student')
 		quick_replies = {"content_type":"text","title":"Enrollment","payload":"enrollment"},{"content_type":"text","title":"College Courses","payload":"college"},{"content_type":"text","title":"Senior High","payload":"sis"},{"content_type":"text","title":"Tesda Programs","payload":"tesda"},{"content_type":"text","title":"Scholarship","payload":"scholarship"},{"content_type":"text","title":"Others","payload":"others"}
