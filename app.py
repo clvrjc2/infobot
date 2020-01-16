@@ -30,7 +30,7 @@ schedule = db["myschedule"]
 programs = db["programs"]
 scholarship = db["scholarship"]
 
-Mongo.create_student(student,'15001191100', 'Rolando C. Becerro Jr.', 'Lannie C. Becerro', '09101064727', 'Butuan City', 'rcbecerro.aclcbutuan@gmail.com') 
+Mongo.create_student(student,'','15001191100', 'Rolando C. Becerro Jr.', 'Lannie C. Becerro', '09101064727', 'Butuan City', 'rcbecerro.aclcbutuan@gmail.com') 
 Mongo.create_schedule(schedule, '15001191100', 'IT Practicum', 'MTH', '8:00 - 12:00', '101', '9', 'Daryll A. Cabagay','2019-2020','2nd')
 Mongo.create_schedule(schedule, '15001191100', 'ITE Professional Ethics', 'TF', '12:30 - 2:00','CL1', '3', 'Junell T. Bujocan','2019-2020','2nd')
 Mongo.create_schedule(schedule, '15001191100', 'Project Management and Quality System', 'TF', '3:30 - 5:00', 'CL4', '3', 'Nino Jabagat','2019-2020','2nd')
