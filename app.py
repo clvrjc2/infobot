@@ -54,7 +54,8 @@ Mongo.create_enrollment(enrollment,'January 6 - 10, 2020', 'Form 138(Report Card
 Mongo.create_enrollment(enrollment,'January 6 - 10, 2020', 'TOR\nHonorable Dismisal\nGood Moral Charachter\n2 photocopies of NSO Birth Certificate', '1,500.00 - 2,500.00 for tuition fee + 750.00 for SSG Fee', '1st Step: Get a Admision form in Admisson Office','transferee')
 Mongo.create_enrollment(enrollment,'January 6 - 10, 2020', 'IF NOT COMPLIED : \nTOR\nForm 138(Report Card)\nCertificate of Good Moral Character\n2 photocopies of NSO Birth Certificate\n1Long brown envelope', '1,500.00 - 2,500.00 for tuition fee + 750.00 for SSG Fee', '1st Step: Get a Admision form in Admisson Office','transferee')
 
-now = dt.now()
+#now = dt.now()
+now = "16 Jan 2020  18:45:00.000"
 d = dt.datetime.strptime(now, "%d %b %Y  %H:%M:%S.%f")
 
 image_url = 'https://raw.githubusercontent.com/clvrjc2/drpedia/master/images/'
