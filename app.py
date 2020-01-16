@@ -29,7 +29,6 @@ exam = db["examschedule"]
 schedule = db["myschedule"]
 programs = db["programs"]
 scholarship = db["scholarship"]
-Mongo.create_program(programs,'','',"CSS\nComputer System Servicing NCII\nA Tesda's Technical Vocational Course\n\nICT\nInformation & Communication Technology\nA Tesda's 3 year Course\n\nTCT\nComputer System Servicing NCII\nA Tesda's 3 year Course\n\nComTech\nComputer System Servicing NCII\nA Tesda's 3 year Course",'tesda','active')
 
 '''
 Mongo.create_student(student,'','15001191100', 'Rolando C. Becerro Jr.', 'Lannie C. Becerro', '09101064727', 'Butuan City', 'rcbecerro.aclcbutuan@gmail.com') 
@@ -198,7 +197,7 @@ def received_text(event):
 		answer = user_data['last_message_answer']
 	else: 
 		pass
-
+	print(ask+" "+answer)
 	if answer == "enrollment":
 		bot.send_text_message(sender_id, 'Just click the Send Requirements Button')
 		bot.send_quick_replies_message(sender_id, 'Get Requirements',  [{"content_type":"text","title":"Send Requirements","payload":"requirements"}])
@@ -233,7 +232,7 @@ def received_text(event):
 		if sched !=None:
 			for x in range(0,sched_count):
 				for data in sched:
-					elements.append(data["subject"]+" "+data["time"]+" "+data["day"] +" "+data["room"]+" "+data["instructor"]+"\n")
+					elements.append(data["subject"]+" "+data["time"]+" "+data["day"] +" "+data["room"]+" "+data["instructor"])
 					bot.send_text_message(sender_id,"* {}".format(elements[x]))
 					if x == sched_count:
 						break
