@@ -45,18 +45,18 @@ def get_enrollment(table, category):
     return None
 
 def get_schedule_count(table, sy, sem, std_id):
-    a = table.find({ $and: [ {'std_id':std_id}, {'sy': sy}, {'sem':sem}] }).count()
+    a = table.find({'std_id':std_id}, {'sy': sy}, {'sem':sem}).count()
     if a != None:
         return a
     return None   
 def get_schedule(table, sy, sem, std_id):
-    a = table.find({ $and: [ {'std_id':std_id}, {'sy': sy}, {'sem':sem} ] })
+    a = table.find( {'std_id':std_id}, {'sy': sy}, {'sem':sem})
     if a != None:
         return a
     return None   
 
 def get_slip(table, sy, sem, std_id):
-    a = table.find_one({ $and: [{ 'std_id':std_id}, {'sy': sy}, {'sem':sem} ] })
+    a = table.find_one({ 'std_id':std_id}, {'sy': sy}, {'sem':sem} )
     if a != None:
         return a
     return None   
@@ -186,7 +186,7 @@ def create_program(programs,requirements,name,description,department,status):
     programs.insert(insert)
     
 def get_program(table,department):
-    a = table.find({ $and: [ {'status':'active'},{'department':department} ] })
+    a = table.find({'status':'active'},{'department':department})
     if a != None:
         return a
     return None   
