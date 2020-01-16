@@ -546,29 +546,29 @@ def received_postback(event):
 			bot.send_quick_replies_message(sender_id, 'Already a student?', quick_replies)
 		else:
 			if Mongo.student_enroll(student, sender_id):
-				bot.send_text_message(sender_id, "{} {},Welcome back!".format(greet,first_name(sender_id))))
+				bot.send_text_message(sender_id, "{} {},Welcome back!".format(greet,first_name(sender_id)))
 				quick_replies = {"content_type":"text","title":"Enrollment","payload":"enrollment"},{"content_type":"text","title":"Schedule","payload":"schedule"},{"content_type":"text","title":"Account Slip","payload":"account_slip"},{"content_type":"text","title":"Exam Schedule","payload":"exam_schedule"},{"content_type":"text","title":"Scholarship","payload":"scholarship"},{"content_type":"text","title":"Others","payload":"others"}
 				bot.send_quick_replies_message(sender_id, 'What can I do for you?', quick_replies)
 			else:
-				bot.send_text_message(sender_id, "{} again {}!".format(greet,first_name(sender_id))))
+				bot.send_text_message(sender_id, "{} again {}!".format(greet,first_name(sender_id)))
 				quick_replies = {"content_type":"text","title":"Enrollment","payload":"enrollment"},{"content_type":"text","title":"College Courses","payload":"college"},{"content_type":"text","title":"Senior High","payload":"sis"},{"content_type":"text","title":"Tesda Programs","payload":"tesda"},{"content_type":"text","title":"Scholarship","payload":"scholarship"},{"content_type":"text","title":"Others","payload":"others"}
 				bot.send_quick_replies_message(sender_id, 'What do you want to know?', quick_replies)
 			
 	#Persistent Menu Buttons        
 	if payload=='start_over':
 		if Mongo.student_enroll(student, sender_id):
-			bot.send_text_message(sender_id, "{} {},Welcome back!".format(greet,first_name(sender_id))))
+			bot.send_text_message(sender_id, "{} {},Welcome back!".format(greet,first_name(sender_id)))
 			quick_replies = {"content_type":"text","title":"Enrollment","payload":"enrollment"},{"content_type":"text","title":"Schedule","payload":"schedule"},{"content_type":"text","title":"Account Slip","payload":"account_slip"},{"content_type":"text","title":"Exam Schedule","payload":"exam_schedule"},{"content_type":"text","title":"Scholarship","payload":"scholarship"},{"content_type":"text","title":"Others","payload":"others"}
 			bot.send_quick_replies_message(sender_id, 'What can I do for you?', quick_replies)
 		else:
-			bot.send_text_message(sender_id, "{} again {}!".format(greet,first_name(sender_id))))
+			bot.send_text_message(sender_id, "{} again {}!".format(greet,first_name(sender_id)))
 			quick_replies = {"content_type":"text","title":"Enrollment","payload":"enrollment"},{"content_type":"text","title":"College Courses","payload":"college"},{"content_type":"text","title":"Senior High","payload":"sis"},{"content_type":"text","title":"Tesda Programs","payload":"tesda"},{"content_type":"text","title":"Scholarship","payload":"scholarship"},{"content_type":"text","title":"Others","payload":"others"}
 			bot.send_quick_replies_message(sender_id, 'What do you want to know?', quick_replies)
 		
 	if payload=='pm_call':
-		bot.send_text_message(sender_id,'call')
+		bot.send_text_message(sender_id,'Under Development')
 	if payload=='pm_admin':
-		bot.send_text_message(sender_id,'Admin')
+		bot.send_text_message(sender_id,'Under Development')
 	
 	
 
