@@ -197,10 +197,13 @@ def received_text(event):
 		pass
 	
 	if ask == 'student?' and answer == 'yes_student':
+		print('trap is good')
 		if Mongo.student_exists(student, text):
+			print('ok')
 			quick_replies = {"content_type":"text","title":"Enrollment","payload":"enrollment"},{"content_type":"text","title":"Schedule","payload":"schedule"},{"content_type":"text","title":"Account Slip","payload":"account_slip"},{"content_type":"text","title":"Exam Schedule","payload":"exam_schedule"},{"content_type":"text","title":"Scholarship","payload":"scholarship"},{"content_type":"text","title":"Others","payload":"others"}
 			bot.send_quick_replies_message(sender_id, 'What can I do for you?', quick_replies)
 		else:
+			print('not ok')
 			bot.send_text_message(sender_id,'Invalid ID number, please try again.')
 	if answer == 'enrollment':
 		bot.send_text_message(sender_id, 'Just click the Send Requirements Button')
