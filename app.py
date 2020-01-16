@@ -327,7 +327,7 @@ def received_qr(event):
 		bot.send_text_message(sender_id,ffee)
 		bot.send_quick_replies_message(sender_id, 'Enrollment Flow?',  [{"content_type":"text","title":"Send Enrollment Flow","payload":"flow"}])
 	if text == 'flow':
-		bot.send_text_message(sender_id,flow)
+		bot.send_text_message(sender_id,fflow)
 		bot.send_text_message(sender_id,"For other matters simply click the 'start over' button in the persistent menu.")
 		
 	if text == 'schedule':
