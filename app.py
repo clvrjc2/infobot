@@ -37,7 +37,7 @@ Mongo.create_schedule(schedule, '15001191100', 'Project Management and Quality S
 Mongo.create_schedule(schedule, '15001191100', 'Free Elective 3', 'WED', '12:00 - 2:30', 'CL2', '3', 'Daryll A. Cabagay','2019-2020','2nd')
 Mongo.create_schedule(schedule, '15001191100', 'IT Major Elective 4', 'WED', '3:00 - 5:00', 'CL2', '3', 'Daryll A. Cabagay','2019-2020','2nd')
 
-Mongo.create_account(account, '15001191100', '2019-2020','2nd' '8,000.00', '6,000.00', '4,000.00', '4,000.00','20,000.00', '0.00','20,000.00', '0.00')   
+Mongo.create_account(account_slip, '15001191100', '2019-2020','2nd' '8,000.00', '6,000.00', '4,000.00', '4,000.00','20,000.00', '0.00','20,000.00', '0.00')   
 
 Mongo.create_program(programs,'CSS',"Computer System Servicing NCII\nA Tesda's Technical Vocational Course",'tesda','active')
 Mongo.create_program(programs,'ICT',"Information & Communication Technology\nA Tesda's 3 year Course",'tesda','active')
