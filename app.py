@@ -227,7 +227,7 @@ def received_text(event):
 		else:
 			nex = d.year + 1
 			sy = "{}-{}".format(d.year,nex)
-			sem = '2nd'
+			sem = '1st'
 		sched = Mongo.get_schedule(schedule, sy, sem,text)
 		sched_count = Mongo.get_schedule_count(table, sy, sem, text)
 		element = []
