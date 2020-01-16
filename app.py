@@ -197,7 +197,9 @@ def received_text(event):
 		answer = user_data['last_message_answer']
 	else: 
 		pass
-	print(ask+" "+answer)
+	if text:
+		print(ask+" "+answer)
+		
 	if answer == "enrollment":
 		bot.send_text_message(sender_id, 'Just click the Send Requirements Button')
 		bot.send_quick_replies_message(sender_id, 'Get Requirements',  [{"content_type":"text","title":"Send Requirements","payload":"requirements"}])
