@@ -539,7 +539,7 @@ def received_postback(event):
 	if payload=='start':
 		greet = random.choice(GREETING_RESPONSES)
 		if not Mongo.user_exists(users,sender_id): #if user_exists == false add user information
-			bot.send_text_message(sender_id, "{} {}!,Welcome to ACLC Butuan's Information Chatbot".format(greet,first_name(sender_id))))
+			bot.send_text_message(sender_id, "{} {}!,Welcome to ACLC Butuan's Information Chatbot".format(greet,first_name(sender_id)))
 			bot.send_text_message(sender_id, "You can do inquiries, know your exam's schedule, get account slip and many other stuff.")
 			Mongo.set_column(users, sender_id,'last_message_ask', 'student?')
 			quick_replies = {"content_type":"text","title":"Yeah","payload":"yes_student"},{"content_type":"text","title":"Not yet","payload":"not_student"}
