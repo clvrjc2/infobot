@@ -29,7 +29,10 @@ exam = db["examschedule"]
 schedule = db["myschedule"]
 programs = db["programs"]
 scholarship = db["scholarship"]
-Mongo.create_account(account_slip, '15001191100', '2019-2020','2nd', '8,000.00', '6,000.00', '4,000.00', '4,000.00','20,000.00', '0.00','20,000.00', '0.00')
+Mongo.create_program(programs,'','',"CSS\nComputer System Servicing NCII\nA Tesda's Technical Vocational Course\n\nICT\nInformation & Communication Technology\nA Tesda's 3 year Course\n\nTCT\nComputer System Servicing NCII\nA Tesda's 3 year Course\n\nComTech\nComputer System Servicing NCII\nA Tesda's 3 year Course",'tesda','active')
+Mongo.create_program(programs,'','',"SADT\nSoftware Application & Development Technology\n\nGAS\nGeneral Academic Strand\n\nSTEM\nScience, Technology, Engineering, and Mathematics",'tesda','active')
+Mongo.create_program(programs,'','','BSCS\nBachelor of Science in Computer Science\n\nBSIT\nBachelor of Science in Information Technoloy\n\nBSBA Marketing\nBachelor of Science in Business Administration Major in Marketing Management\n\nBSBA Finance\nBachelor of Science in Business Administration Major in Financial Management','college','active')
+
 '''
 Mongo.create_student(student,'','15001191100', 'Rolando C. Becerro Jr.', 'Lannie C. Becerro', '09101064727', 'Butuan City', 'rcbecerro.aclcbutuan@gmail.com') 
 Mongo.create_schedule(schedule, '15001191100', 'IT Practicum', 'MTH', '8:00 - 12:00', '101', '9', 'Daryll A. Cabagay','2019-2020','2nd')
@@ -39,18 +42,16 @@ Mongo.create_schedule(schedule, '15001191100', 'Free Elective 3', 'WED', '12:00 
 Mongo.create_schedule(schedule, '15001191100', 'IT Major Elective 4', 'WED', '3:00 - 5:00', 'CL2', '3', 'Daryll A. Cabagay','2019-2020','2nd')
 #account, std_id, sy, sem, prelim, midterm, prefinal, final,total, amount_paid,balance, old_account
 Mongo.create_account(account_slip, '15001191100', '2019-2020','2nd', '8,000.00', '6,000.00', '4,000.00', '4,000.00','20,000.00', '0.00','20,000.00', '0.00')   
+Mongo.create_account(account_slip, '15001191100', '2019-2020','2nd', '8,000.00', '6,000.00', '4,000.00', '4,000.00','20,000.00', '0.00','20,000.00', '0.00')
 
-Mongo.create_program(programs,'','CSS',"Computer System Servicing NCII\nA Tesda's Technical Vocational Course",'tesda','active')
-Mongo.create_program(programs,'','ICT',"Information & Communication Technology\nA Tesda's 3 year Course",'tesda','active')
-Mongo.create_program(programs,'','TCT',"Computer System Servicing NCII\nA Tesda's 3 year Course",'tesda','active')
-Mongo.create_program(programs,'','ComTech',"Computer System Servicing NCII\nA Tesda's 3 year Course",'tesda','active')
-Mongo.create_program(programs,'','SADT',"Software Application & Development Technology",'tesda','active')
-Mongo.create_program(programs,'','GAS','General Academic Strand','sis','active')
-Mongo.create_program(programs,'','STEM','Science, Technology, Engineering, and Mathematics','sis','active')
-Mongo.create_program(programs,'','BSIT','Bachelor of Science in Information Technoloy','college','active')
-Mongo.create_program(programs,'','BSBA Major in Marketing Management','Bachelor of Science in Business Administration Major in Marketing Management','college','active')
-Mongo.create_program(programs,'','BSBA Major in Financial Management','Bachelor of Science in Business Administration Major in Financial Management','college','active')
-Mongo.create_program(programs,'','BSCS','Bachelor of Science in Computer Science','college','active')
+Mongo.create_program(programs,'','',"",'tesda','active')
+Mongo.create_program(programs,'','',"",'tesda','active')
+Mongo.create_program(programs,'','',"",'tesda','active')
+Mongo.create_program(programs,'','','','sis','active')
+Mongo.create_program(programs,'','','','sis','active')
+Mongo.create_program(programs,'','BSBA Major in Marketing Management','','college','active')
+Mongo.create_program(programs,'','BSBA Major in Financial Management','','college','active')
+Mongo.create_program(programs,'','','','college','active')
 Mongo.create_enrollment(enrollment,'January 6 - 10, 2020', 'Form 138(Report Card)\nCertificate of Good Moral Character\n2 photocopies of NSO Birth Certificate\n1Long brown envelope', '1,500.00 - 2,500.00 for tuition fee + 750.00 for SSG Fee', '1st Step: Get a Admision form in Admisson Office','freshmen')
 Mongo.create_enrollment(enrollment,'January 6 - 10, 2020', 'TOR\nHonorable Dismisal\nGood Moral Charachter\n2 photocopies of NSO Birth Certificate', '1,500.00 - 2,500.00 for tuition fee + 750.00 for SSG Fee', '1st Step: Get a Admision form in Admisson Office','transferee')
 Mongo.create_enrollment(enrollment,'January 6 - 10, 2020', 'IF NOT COMPLIED : \nTOR\nForm 138(Report Card)\nCertificate of Good Moral Character\n2 photocopies of NSO Birth Certificate\n1Long brown envelope', '1,500.00 - 2,500.00 for tuition fee + 750.00 for SSG Fee', '1st Step: Get a Admision form in Admisson Office','transferee')
@@ -428,7 +429,7 @@ def received_qr(event):
 				n = data['name']
 				d = data['description']
 			else:
-				bot.send_text_message(sender_id, "Course : {}\nDescription :{}".format(n,d))
+				bot.send_text_message(sender_id, "Course : {}".format(d))
 		else: 
 			pass
 		
@@ -441,7 +442,7 @@ def received_qr(event):
 				n = data['name']
 				d = data['description']
 			else:
-				bot.send_text_message(sender_id, "Course : {}\nDescription :{}".format(n,d))
+				bot.send_text_message(sender_id, "Course : {}".format(d))
 			
 		else: 
 			pass
@@ -454,7 +455,7 @@ def received_qr(event):
 				n = data['name']
 				d = data['description']
 			else:
-				bot.send_text_message(sender_id, "Tesda Program : {}\nDescription :{}".format(n,d))
+				bot.send_text_message(sender_id, "Tesda Program : {}".format(d))
 		else: 
 			pass
 	
