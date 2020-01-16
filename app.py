@@ -240,6 +240,22 @@ def received_text(event):
 					
 		else: 
 			pass
+	if answer == "account_slip":
+		if d.month in range(1,7):
+			prev = d.year - 1
+			sem = '2nd'
+			sy = "{}-{}".format(prev,d.year)
+		else:
+			nex = d.year + 1
+			sy = "{}-{}".format(d.year,nex)
+			sem = '2nd'
+		slip = Mongo.get_slip(account_slip, sy, sem,text)
+		if slip !=None:
+			bot.send_text_message(sender_id,"ACCOUNT SLIP")
+			a = "Prelim :{}\nMidterm :{}\nPrefinal :{}\nFinal :{}\nTotal :{}\nAmount Paid :{}\nBalance :{}\nOld Account :{}".format(data["prelim"], data["midterm"], data["prefinal"], data["final"], data["total"], data["amount_paid"], data["balance"], data["old_account"])
+			bot.send_text_message(sender_id,a)
+		else: 
+			pass
 	'''		
 	if ask == "agree and proceed?" and answer == "see_details":
 		oneqrbtn = [{"content_type":"text","title":"🤝Agree and proceed","payload":'ready_accept'}]
@@ -365,9 +381,9 @@ def received_qr(event):
 		bot.send_text_message(sender_id, "Please enter your student ID number.\nFor Example: 15000011000")
 		'''if d.month in range(1,7):
 			prev = d.year - 1
-			sy = "{}-{}".format(prev,d.year)
 			sem = '2nd'
-		else:
+		el	sy = "{}-{}".format(prev,d.year)
+		se:
 			nex = d.year + 1
 			sy = "{}-{}".format(d.year,nex)
 			sem = '2nd'
