@@ -9,7 +9,7 @@ from pymongo import MongoClient
 import Mongo#import Mongo.py
 from nlu import nlp
 from collections import Counter #install collections
-from datetime import datetime
+import datetime as dt
 #Libraries to be import END
 
 app = Flask(__name__)
@@ -54,8 +54,8 @@ Mongo.create_enrollment(enrollment,'January 6 - 10, 2020', 'Form 138(Report Card
 Mongo.create_enrollment(enrollment,'January 6 - 10, 2020', 'TOR\nHonorable Dismisal\nGood Moral Charachter\n2 photocopies of NSO Birth Certificate', '1,500.00 - 2,500.00 for tuition fee + 750.00 for SSG Fee', '1st Step: Get a Admision form in Admisson Office','transferee')
 Mongo.create_enrollment(enrollment,'January 6 - 10, 2020', 'IF NOT COMPLIED : \nTOR\nForm 138(Report Card)\nCertificate of Good Moral Character\n2 photocopies of NSO Birth Certificate\n1Long brown envelope', '1,500.00 - 2,500.00 for tuition fee + 750.00 for SSG Fee', '1st Step: Get a Admision form in Admisson Office','transferee')
 
-now = datetime.now()
-d = datetime.datetime.strptime(now, "%d %b %Y  %H:%M:%S.%f")
+now = dt.now()
+d = dt.datetime.strptime(now, "%d %b %Y  %H:%M:%S.%f")
 
 image_url = 'https://raw.githubusercontent.com/clvrjc2/drpedia/master/images/'
 GREETING_RESPONSES = ["Hi", "Hey", "Hello there", "Hello", "Hi there"]
