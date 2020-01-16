@@ -33,7 +33,7 @@ def create_user(users, sender_id, user_fb):
     users.insert(user_insert)
     
 def get_data_users(table, sender_id):
-    a = table.find({'sender_id': sender_id})
+    a = table.find_one({'sender_id': sender_id})
     if a != None:
         return a
     return None   
