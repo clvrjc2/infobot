@@ -198,7 +198,7 @@ def received_text(event):
 	else: 
 		pass
 	if text:
-		print(ask+" "+answer)
+		print(ask+" asdasd "+answer)
 		
 	if answer == "enrollment":
 		bot.send_text_message(sender_id, 'Just click the Send Requirements Button')
