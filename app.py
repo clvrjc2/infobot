@@ -29,9 +29,6 @@ exam = db["examschedule"]
 schedule = db["myschedule"]
 programs = db["programs"]
 scholarship = db["scholarship"]
-Mongo.create_program(programs,'','',"CSS\nComputer System Servicing NCII\nA Tesda's Technical Vocational Course\n\nICT\nInformation & Communication Technology\nA Tesda's 3 year Course\n\nTCT\nComputer System Servicing NCII\nA Tesda's 3 year Course\n\nComTech\nComputer System Servicing NCII\nA Tesda's 3 year Course",'tesda','active')
-Mongo.create_program(programs,'','',"SADT\nSoftware Application & Development Technology\n\nGAS\nGeneral Academic Strand\n\nSTEM\nScience, Technology, Engineering, and Mathematics",'tesda','active')
-Mongo.create_program(programs,'','','BSCS\nBachelor of Science in Computer Science\n\nBSIT\nBachelor of Science in Information Technoloy\n\nBSBA Marketing\nBachelor of Science in Business Administration Major in Marketing Management\n\nBSBA Finance\nBachelor of Science in Business Administration Major in Financial Management','college','active')
 
 '''
 Mongo.create_student(student,'','15001191100', 'Rolando C. Becerro Jr.', 'Lannie C. Becerro', '09101064727', 'Butuan City', 'rcbecerro.aclcbutuan@gmail.com') 
@@ -43,6 +40,10 @@ Mongo.create_schedule(schedule, '15001191100', 'IT Major Elective 4', 'WED', '3:
 #account, std_id, sy, sem, prelim, midterm, prefinal, final,total, amount_paid,balance, old_account
 Mongo.create_account(account_slip, '15001191100', '2019-2020','2nd', '8,000.00', '6,000.00', '4,000.00', '4,000.00','20,000.00', '0.00','20,000.00', '0.00')   
 Mongo.create_account(account_slip, '15001191100', '2019-2020','2nd', '8,000.00', '6,000.00', '4,000.00', '4,000.00','20,000.00', '0.00','20,000.00', '0.00')
+
+Mongo.create_program(programs,'','',"CSS\nComputer System Servicing NCII\nA Tesda's Technical Vocational Course\n\nICT\nInformation & Communication Technology\nA Tesda's 3 year Course\n\nTCT\nComputer System Servicing NCII\nA Tesda's 3 year Course\n\nComTech\nComputer System Servicing NCII\nA Tesda's 3 year Course",'tesda','active')
+Mongo.create_program(programs,'','',"SADT\nSoftware Application & Development Technology\n\nGAS\nGeneral Academic Strand\n\nSTEM\nScience, Technology, Engineering, and Mathematics",'tesda','active')
+Mongo.create_program(programs,'','','BSCS\nBachelor of Science in Computer Science\n\nBSIT\nBachelor of Science in Information Technoloy\n\nBSBA Marketing\nBachelor of Science in Business Administration Major in Marketing Management\n\nBSBA Finance\nBachelor of Science in Business Administration Major in Financial Management','college','active')
 
 Mongo.create_program(programs,'','',"",'tesda','active')
 Mongo.create_program(programs,'','',"",'tesda','active')
@@ -196,17 +197,7 @@ def received_text(event):
 		answer = user_data['last_message_answer']
 	else: 
 		pass
-	print(answer)
-	if answer == "yes_student":
-		print('trap is good')
-		if Mongo.student_exists(student, text):
-			print('ok')
-			Mongo.set_column(users, sender_id,'std_id', text)
-			quick_replies = {"content_type":"text","title":"Enrollment","payload":"enrollment"},{"content_type":"text","title":"Schedule","payload":"schedule"},{"content_type":"text","title":"Account Slip","payload":"account_slip"},{"content_type":"text","title":"Exam Schedule","payload":"exam_schedule"},{"content_type":"text","title":"Scholarship","payload":"scholarship"},{"content_type":"text","title":"Others","payload":"others"}
-			bot.send_quick_replies_message(sender_id, 'What can I do for you?', quick_replies)
-		else:
-			print('not ok')
-			bot.send_text_message(sender_id,'Invalid ID number, please try again.')
+
 	if answer == "enrollment":
 		bot.send_text_message(sender_id, 'Just click the Send Requirements Button')
 		bot.send_quick_replies_message(sender_id, 'Get Requirements',  [{"content_type":"text","title":"Send Requirements","payload":"requirements"}])
@@ -226,7 +217,28 @@ def received_text(event):
 		bot.send_text_message(sender_id, 'Just click the Send Enrollment Fee Button')
 		bot.send_text_message(sender_id, 'For other matters simply click the start over button in the persistent menu')
 		bot.send_quick_replies_message(sender_id, 'Enrollment Fee?',  [{"content_type":"text","title":"Send Enrollment Fee","payload":"fee"}])
-
+	if answer == "schedule":
+		if d.month in range(1,7):
+			prev = d.year - 1
+			sy = "{}-{}".format(prev,d.year)
+			sem = '2nd'
+		else:
+			nex = d.year + 1
+			sy = "{}-{}".format(d.year,nex)
+			sem = '2nd'
+		sched = Mongo.get_schedule(schedule, sy, sem,text)
+		sched_count = Mongo.get_schedule_count(table, sy, sem, text)
+		element = []
+		if sched !=None:
+			for x in range(0,sched_count):
+				for data in sched:
+					elements.append(data["subject"]+" "+data["time"]+" "+data["day"] +" "+data["room"]+" "+data["instructor"],)
+					if x == sched_count:
+						break
+				else:
+					bot.send_text_message(sender_id,"* {}".format())
+		else: 
+			pass
 	'''		
 	if ask == "agree and proceed?" and answer == "see_details":
 		oneqrbtn = [{"content_type":"text","title":"🤝Agree and proceed","payload":'ready_accept'}]
@@ -333,38 +345,24 @@ def received_qr(event):
 		bot.send_text_message(sender_id,"For other matters simply click the 'start over' button in the persistent menu.")
 		
 	if text == 'schedule':
-		Mongo.set_column(users, sender_id,'last_message_answer', 'schedule')
 		quick_replies = {"content_type":"text","title":"Current","payload":"current"},{"content_type":"text","title":"Previous","payload":"previous"}
 		bot.send_quick_replies_message(sender_id, 'What schedule?', quick_replies)
 	
 	if text == 'previous':
 		bot.send_text_message(sender_id,'Under Development')
 	if text == 'current':
-		if d.month in range(1,7):
-			prev = d.year - 1
-			sy = "{}-{}".format(prev,d.year)
-			sem = '2nd'
-		else:
-			nex = d.year + 1
-			sy = "{}-{}".format(d.year,nex)
-			sem = '2nd'
-		sched = Mongo.get_schedule(schedule, sy, sem,std_id)
-		if sched !=None:
-			for data in sched:
-				a = data["subject"]+" "+data["time"]+" "+data["day"] +" "+data["room"]+" "+data["instructor"]
-			else:
-				bot.send_text_message(sender_id,"* {}".format(a))
-		else: 
-			pass
+		Mongo.set_column(users, sender_id,'last_message_answer', 'schedule')
+		bot.send_text_message(sender_id, "Please enter your student ID number.\nFor Example: 15000011000")
 		
 	if text == 'account_slip':
-		Mongo.set_column(users, sender_id,'last_message_answer', 'account_slip')
 		quick_replies = {"content_type":"text","title":"Current","payload":"current_a"},{"content_type":"text","title":"Previous","payload":"previous_a"}
 		bot.send_quick_replies_message(sender_id, 'What account slip?', quick_replies)
 	if text == 'previous_a':
 		bot.send_text_message(sender_id,'Under Development')
 	if text == 'current_a':
-		if d.month in range(1,7):
+		Mongo.set_column(users, sender_id,'last_message_answer', 'account_slip')
+		bot.send_text_message(sender_id, "Please enter your student ID number.\nFor Example: 15000011000")
+		'''if d.month in range(1,7):
 			prev = d.year - 1
 			sy = "{}-{}".format(prev,d.year)
 			sem = '2nd'
@@ -380,9 +378,11 @@ def received_qr(event):
 			else:
 				bot.send_text_message(sender_id,a)
 		else: 
-			pass
+			pass'''
 		
 	if text == 'exam_schedule':
+		bot.send_text_message(sender_id,'Under Development')
+		'''
 		if d.month in range(1,7):
 			prev = d.year - 1
 			sy = "{}-{}".format(prev,d.year)
@@ -398,26 +398,23 @@ def received_qr(event):
 			else:
 				bot.send_text_message(sender_id,"* {}".format(a))
 		else: 
-			pass
+			pass'''
 	if text == 'scholarship':
 		#requirements,name,description,status
 		quick_replies = {"content_type":"text","title":"CHED","payload":"ched"},{"content_type":"text","title":"Barangay Scholarship","payload":"brgy"},{"content_type":"text","title":"City Scholarship","payload":"city"},{"content_type":"text","title":"Sports Scholarship","payload":"sports"},{"content_type":"text","title":"Deanslist Program","payload":"deans"},{"content_type":"text","title":"Student Assistant","payload":"sa"}
 		bot.send_quick_replies_message(sender_id, "ACLC Butuan's Scholarship Programs", quick_replies)
 	if text == 'ched':	
-		pass
+		bot.send_text_message(sender_id,'For further information, please iquire at ACLC OSAS Office.')
 	if text == 'brgy':	
-		pass
+		bot.send_text_message(sender_id,'For further information, please iquire at ACLC OSAS Office.')
 	if text == 'city':	
-		pass
+		bot.send_text_message(sender_id,'For further information, please iquire at ACLC OSAS Office.')
 	if text == 'sports':	
-		pass
+		bot.send_text_message(sender_id,'For further information, please iquire at ACLC OSAS Office.')
 	if text == 'sa':	
-		pass
+		bot.send_text_message(sender_id,'For further information, please iquire at ACLC HR Office.')
 	if text == 'deans':		
-		pass
-	if text == 'others':
-		bot.send_text_message(sender_id, "Simply type it in.")
-	
+		bot.send_text_message(sender_id,'For further details, please iquire at ACLC Deans Office.')
 	#If not student
 	
 	if text == 'college':
@@ -425,8 +422,6 @@ def received_qr(event):
 		p = Mongo.get_program(programs,'college')
 		if p !=None:
 			for data in p:
-				req = data['requirements']
-				n = data['name']
 				d = data['description']
 			else:
 				bot.send_text_message(sender_id, "Course : {}".format(d))
@@ -435,33 +430,28 @@ def received_qr(event):
 		
 	if text == 'sis':
 		bot.send_text_message(sender_id, "These are the following Senior High Courses we offer :")
-		p = Mongo.get_program(programs,'sis')
-		if p !=None:
-			for data in p:
-				req = data['requirements']
-				n = data['name']
-				d = data['description']
+		i= Mongo.get_program(programs,'sis')
+		if i !=None:
+			for data in i:
+				sdes = data['description']
 			else:
-				bot.send_text_message(sender_id, "Course : {}".format(d))
+				bot.send_text_message(sender_id, "Course : {}".format(sdes))
 			
 		else: 
 			pass
 	if text == 'tesda':
 		bot.send_text_message(sender_id, "These are the following Tesda Programs we offer :")
-		p = Mongo.get_program(programs,'tesda')
-		if p !=None:
-			for data in p:
-				req = data['requirements']
-				n = data['name']
-				d = data['description']
+		f = Mongo.get_program(programs,'tesda')
+		if f !=None:
+			for data in f:
+				ftes = data['description']
 			else:
-				bot.send_text_message(sender_id, "Tesda Program : {}".format(d))
+				bot.send_text_message(sender_id, "Tesda Program : {}".format(ftes))
 		else: 
 			pass
 	
 	if text == 'yes_student':
-		#Mongo.set_column(users, sender_id,'last_message_answer', 'yes_student')
-		#bot.send_text_message(sender_id, "Please enter your student ID number.\nFor Example: 15000011000")
+		
 		quick_replies = {"content_type":"text","title":"Enrollment","payload":"enrollment"},{"content_type":"text","title":"Schedule","payload":"schedule"},{"content_type":"text","title":"Account Slip","payload":"account_slip"},{"content_type":"text","title":"Exam Schedule","payload":"exam_schedule"},{"content_type":"text","title":"Scholarship","payload":"scholarship"},{"content_type":"text","title":"Others","payload":"others"}
 		bot.send_quick_replies_message(sender_id, 'What can I do for you?', quick_replies)
 	if text == 'not_student':
