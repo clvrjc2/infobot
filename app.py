@@ -29,7 +29,7 @@ exam = db["examschedule"]
 schedule = db["myschedule"]
 programs = db["programs"]
 scholarship = db["scholarship"]
-
+'''
 Mongo.create_student(student,'','15001191100', 'Rolando C. Becerro Jr.', 'Lannie C. Becerro', '09101064727', 'Butuan City', 'rcbecerro.aclcbutuan@gmail.com') 
 Mongo.create_schedule(schedule, '15001191100', 'IT Practicum', 'MTH', '8:00 - 12:00', '101', '9', 'Daryll A. Cabagay','2019-2020','2nd')
 Mongo.create_schedule(schedule, '15001191100', 'ITE Professional Ethics', 'TF', '12:30 - 2:00','CL1', '3', 'Junell T. Bujocan','2019-2020','2nd')
@@ -53,7 +53,7 @@ Mongo.create_program(programs,'','BSCS','Bachelor of Science in Computer Science
 Mongo.create_enrollment(enrollment,'January 6 - 10, 2020', 'Form 138(Report Card)\nCertificate of Good Moral Character\n2 photocopies of NSO Birth Certificate\n1Long brown envelope', '1,500.00 - 2,500.00 for tuition fee + 750.00 for SSG Fee', '1st Step: Get a Admision form in Admisson Office','freshmen')
 Mongo.create_enrollment(enrollment,'January 6 - 10, 2020', 'TOR\nHonorable Dismisal\nGood Moral Charachter\n2 photocopies of NSO Birth Certificate', '1,500.00 - 2,500.00 for tuition fee + 750.00 for SSG Fee', '1st Step: Get a Admision form in Admisson Office','transferee')
 Mongo.create_enrollment(enrollment,'January 6 - 10, 2020', 'IF NOT COMPLIED : \nTOR\nForm 138(Report Card)\nCertificate of Good Moral Character\n2 photocopies of NSO Birth Certificate\n1Long brown envelope', '1,500.00 - 2,500.00 for tuition fee + 750.00 for SSG Fee', '1st Step: Get a Admision form in Admisson Office','transferee')
-
+'''
 #now = dt.now()
 now = "16 Jan 2020  18:45:00.000"
 d = dt.datetime.strptime(now, "%d %b %Y  %H:%M:%S.%f")
@@ -142,9 +142,6 @@ def receive_message():
 				if message.get('message'):
 					#Facebook Messenger ID for user so we know where to send response back to
 					sender_id = message['sender']['id']
-					user_data = Mongo.get_data_users(users, sender_id)
-					patient_data = Mongo.get_data_patient(patient, sender_id)
-		
 					if message['message'].get('text'):
 						if message['message'].get('quick_reply'):
 							received_qr(message)  
