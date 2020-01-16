@@ -153,7 +153,7 @@ def create_exam(exam, std_id, subject, day, time, room, proctor,sy,sem):
     exam.insert(insert)
     
 def get_scholarship(table):
-    a = table.find({'std_id':'active'})
+    a = table.find({'status':'active'})
     if a != None:
         return a
     return None  
@@ -165,15 +165,27 @@ def create_scholarship(scholarship,requirements,name,description,status):
                         'status': status
                         }
     scholarship.insert(insert)
-        
-def create_program(programs,name,description,department,status):                     
-    insert = { 
+    
+def get_scholarship(table):
+    a = table.find()
+    if a != None:
+        return a
+    return None  
+
+def create_program(programs,requirements,name,description,department,status):                     
+    insert = {          'requirements':requirements,
                         'name': name,
                         'description': description,
                         'department':department,
                         'status': status
                         }
     programs.insert(insert)
+    
+def get_program(table,department):
+    a = table.find({'status':'active','department':department})
+    if a != None:
+        return a
+    return None   
     
 def get_details(table):
     a = table.find()
