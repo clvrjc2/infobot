@@ -29,6 +29,7 @@ exam = db["examschedule"]
 schedule = db["myschedule"]
 programs = db["programs"]
 scholarship = db["scholarship"]
+Mongo.create_account(account_slip, '15001191100', '2019-2020','2nd', '8,000.00', '6,000.00', '4,000.00', '4,000.00','20,000.00', '0.00','20,000.00', '0.00')
 '''
 Mongo.create_student(student,'','15001191100', 'Rolando C. Becerro Jr.', 'Lannie C. Becerro', '09101064727', 'Butuan City', 'rcbecerro.aclcbutuan@gmail.com') 
 Mongo.create_schedule(schedule, '15001191100', 'IT Practicum', 'MTH', '8:00 - 12:00', '101', '9', 'Daryll A. Cabagay','2019-2020','2nd')
@@ -350,6 +351,7 @@ def received_qr(event):
 		if sched !=None:
 			for data in sched:
 				a = data["subject"]+" "+data["time"]+" "+data["day"] +" "+data["room"]+" "+data["instructor"]
+			else:
 				bot.send_text_message(sender_id,"* {}".format(a))
 		else: 
 			pass
@@ -373,7 +375,9 @@ def received_qr(event):
 		if slip !=None:
 			bot.send_text_message(sender_id,"ACCOUNT SLIP")
 			for data in slip:
-				bot.send_text_message(sender_id,"Prelim :{}\nMidterm :{}\nPrefinal :{}\nFinal :{}\nTotal :{}\nAmount Paid :{}\nBalance :{}\nOld Account :{}".format(data["prelim"], data["midterm"], data["prefinal"], data["final"], data["total"], data["amount_paid"], data["balance"], data["old_account"]))
+				a = "Prelim :{}\nMidterm :{}\nPrefinal :{}\nFinal :{}\nTotal :{}\nAmount Paid :{}\nBalance :{}\nOld Account :{}".format(data["prelim"], data["midterm"], data["prefinal"], data["final"], data["total"], data["amount_paid"], data["balance"], data["old_account"])
+			else:
+				bot.send_text_message(sender_id,a)
 		else: 
 			pass
 		
@@ -390,6 +394,7 @@ def received_qr(event):
 		if sched !=None:
 			for data in sched:
 				a = data["subject"]+" "+data["time"]+" "+data["day"] +" "+data["room"]+" "+data["instructor"]
+			else:
 				bot.send_text_message(sender_id,"* {}".format(a))
 		else: 
 			pass
@@ -422,6 +427,7 @@ def received_qr(event):
 				req = data['requirements']
 				n = data['name']
 				d = data['description']
+			else:
 				bot.send_text_message(sender_id, "Course : {}\nDescription :{}".format(n,d))
 		else: 
 			pass
@@ -434,6 +440,7 @@ def received_qr(event):
 				req = data['requirements']
 				n = data['name']
 				d = data['description']
+			else:
 				bot.send_text_message(sender_id, "Course : {}\nDescription :{}".format(n,d))
 			
 		else: 
@@ -446,6 +453,7 @@ def received_qr(event):
 				req = data['requirements']
 				n = data['name']
 				d = data['description']
+			else:
 				bot.send_text_message(sender_id, "Tesda Program : {}\nDescription :{}".format(n,d))
 		else: 
 			pass
