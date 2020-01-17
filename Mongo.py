@@ -43,13 +43,13 @@ def get_enrollment(table, category):
     if a != None:
         return a
     return None
-
+'''
 def get_schedule_count(table, std_id):
     #,'sy': sy,'sem':sem
     a = table.find_one({'std_id':std_id}).count()
     if a != None:
         return a
-    return None   
+    return None   '''
 def get_schedule(table, std_id):
     #,'sy': sy,'sem':sem
     a = table.find_one( {'std_id':std_id})
