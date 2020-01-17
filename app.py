@@ -233,7 +233,12 @@ def received_text(event):
 		if sched !=None:
 			for x in range(0,sched_count):
 				for data in sched:
-					bot.send_text_message(sender_id,"* {} {} {} {} {} {}".format(data["subject"],data["time"],data["day"],data["room"],data["instructor"]))
+					subject = data["subject"]
+					time = data["time"]
+					day = data["day"]
+					room = data["room"]
+					ins = data["instructor"]
+					bot.send_text_message(sender_id,"* {} {} {} {} {} {}".format(subject, time, day, room, ins))
 					x =+1
 					if x == sched_count:
 						break
