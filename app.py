@@ -440,9 +440,8 @@ def received_qr(event):
 		bot.send_text_message(sender_id, "These are the following College Courses we offer :")
 		p = Mongo.get_program(programs,'college')
 		if p !=None:
-			for data in p:
-				d = data['description']
-				bot.send_text_message(sender_id, "Course : {}".format(d))
+			d = p['description']
+			bot.send_text_message(sender_id, "Course : {}".format(d))
 		else: 
 			pass
 		
@@ -450,9 +449,8 @@ def received_qr(event):
 		bot.send_text_message(sender_id, "These are the following Senior High Courses we offer :")
 		i= Mongo.get_program(programs,'sis')
 		if i !=None:
-			for data in i:
-				sdes = data['description']
-				bot.send_text_message(sender_id, "Course : {}".format(sdes))
+			sdes = i['description']
+			bot.send_text_message(sender_id, "Course : {}".format(sdes))
 			
 		else: 
 			pass
@@ -460,9 +458,8 @@ def received_qr(event):
 		bot.send_text_message(sender_id, "These are the following Tesda Programs we offer :")
 		f = Mongo.get_program(programs,'tesda')
 		if f !=None:
-			for data in f:
-				ftes = data['description']
-				bot.send_text_message(sender_id, "Tesda Program : {}".format(ftes))
+			ftes = f['description']
+			bot.send_text_message(sender_id, "Tesda Program : {}".format(ftes))
 		else: 
 			pass
 	
