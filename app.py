@@ -199,23 +199,23 @@ def received_text(event):
 	if answer == "enrollment":
 		bot.send_text_message(sender_id, 'Just click the Send Requirements Button')
 		bot.send_quick_replies_message(sender_id, 'Get Requirements',  [{"content_type":"text","title":"Send Requirements","payload":"requirements"}])
-	if answer == "requirements":
+	elif answer == "requirements":
 		bot.send_text_message(sender_id, 'Simply click the buttons')
 		quick_replies = {"content_type":"text","title":"Freshmen","payload":"freshmen"},{"content_type":"text","title":"Transferee","payload":"transferee"},{"content_type":"text","title":"Old Student","payload":"old"}
 		bot.send_quick_replies_message(sender_id, 'Requirements for ?', quick_replies)
-	if answer == "freshmen":
+	elif answer == "freshmen":
 		bot.send_text_message(sender_id, 'Just click the Send Enrollment Fee Button')
 		bot.send_text_message(sender_id, 'For other matters simply click the start over button in the persistent menu')
 		bot.send_quick_replies_message(sender_id, 'Enrollment Fee?',  [{"content_type":"text","title":"Send Enrollment Fee","payload":"fee"}])
-	if answer == "transferee":
+	elif answer == "transferee":
 		bot.send_text_message(sender_id, 'Just click the Send Enrollment Fee Button')
 		bot.send_text_message(sender_id, 'For other matters simply click the start over button in the persistent menu')
 		bot.send_quick_replies_message(sender_id, 'Enrollment Fee?',  [{"content_type":"text","title":"Send Enrollment Fee","payload":"fee"}])
-	if answer == "old":
+	elif answer == "old":
 		bot.send_text_message(sender_id, 'Just click the Send Enrollment Fee Button')
 		bot.send_text_message(sender_id, 'For other matters simply click the start over button in the persistent menu')
 		bot.send_quick_replies_message(sender_id, 'Enrollment Fee?',  [{"content_type":"text","title":"Send Enrollment Fee","payload":"fee"}])
-	if answer == "schedule":
+	elif answer == "schedule":
 		if d.month in range(1,7):
 			prev = d.year - 1
 			sy = "{}-{}".format(prev,d.year)
@@ -242,7 +242,7 @@ def received_text(event):
 					
 		else: 
 			pass
-	if answer == "account_slip":
+	elif answer == "account_slip":
 		if d.month in range(1,7):
 			prev = d.year - 1
 			sem = '2nd'
@@ -258,6 +258,10 @@ def received_text(event):
 			bot.send_text_message(sender_id,a)
 		else: 
 			pass
+	else:
+		deeplearn(sender_id,text)
+		
+	deeplearn(sender_id,text)
 	'''		
 	if ask == "agree and proceed?" and answer == "see_details":
 		oneqrbtn = [{"content_type":"text","title":"🤝Agree and proceed","payload":'ready_accept'}]
@@ -274,7 +278,59 @@ def received_text(event):
 		x =["Im sorry, humans are complicated, I'm not trained to understand things well","Sorry, I did't quite follow that, perhaps use different words?","Sorry, I did't quite follow that, maybe use different words?"]
 		bot.send_text_message(sender_id,random.choice(x))
 	'''		
-
+def deeplearn(sender_id,text):
+	inputs = nlp.nlp(text)
+	if inputs != 'Invalid':
+		if text == "ama hymn":
+			pass
+		if text == "location":
+			pass
+		if text == "enrollment flo":
+			pass
+		if text == "aclc":
+			bot.send_text_message(sender_id,"AMA Computer Learning Center\nA member of the AMA Education System (AMAES) founded by Dr. Amable R. Aguiluz V – the father of IT education in the Philippines. Established in 1986, ACLC stands for AMA Computer Learning Center, as it was originally a computer training center offering skill-based courses on computer hardware and software. To date, ACLC remain to be a popular choice for TESDA Short Courses in the Philippines.") 
+		if text == "semester":
+			bot.send_text_message(sender_id,"Every semester ACLC Butuan has two semester each year")
+		if text == "per unit":
+			bot.send_text_message(sender_id,"Per unit cost 350 exclusive for laboratory fee and etc")
+			bot.send_text_message(sender_id,"Overall tuition fee is in range between 13,000.00 upto 23,000.00 per semester")
+		if text == "tuition fee":
+			bot.send_text_message(sender_id,"Overall tuition fee is in range between 13,000.00 upto 23,000.00 per semester")
+		if text == "enrollment fee":
+			bot.send_text_message(sender_id,"Enrollment fee for Freshmen, Transferee and Old/Current Student is\n1,500 - 2,500 tuition fee + 750 SSG Fee")
+			bot.send_quick_replies_message(sender_id, 'Get Requirements',  [{"content_type":"text","title":"Send Requirements","payload":"requirements"}])
+		if text == "tesda programs":
+			bot.send_text_message(sender_id, "These are the following Tesda Programs we offer :")
+			f = Mongo.get_program(programs,'tesda')
+			if f !=None:
+				ftes = f.get('description')
+				bot.send_text_message(sender_id, "Tesda Program : {}".format(ftes))
+			else: 
+				pass
+		if text == "enrollment requirements":
+			bot.send_text_message(sender_id,"Please click the 'Get Requirements' button")
+			bot.send_quick_replies_message(sender_id, 'Get Requirements',  [{"content_type":"text","title":"Send Requirements","payload":"requirements"}])
+		if text == "owner":
+			bot.send_text_message(sender_id, "Due to company policy!\nWe cannot disclose those information")
+		if text == "organizational chart":
+			bot.send_text_message(sender_id, "Due to company policy!\nWe cannot disclose those information")
+		if text == "balance payable":
+			quick_replies = {"content_type":"text","title":"Current","payload":"current_a"},{"content_type":"text","title":"Old","payload":"previous_a"}
+			bot.send_quick_replies_message(sender_id, 'What Balance?', quick_replies)
+		if text == "accounting slip":
+			quick_replies = {"content_type":"text","title":"Current","payload":"current_a"},{"content_type":"text","title":"Previous","payload":"previous_a"}
+			bot.send_quick_replies_message(sender_id, 'What account slip?', quick_replies)
+		if text == "office hours":
+			bot.send_text_message(sender_id, "We are open every weekdays from 8:00 am to 5:00pm")
+		if text == "course offer":
+			quick_replies = {"content_type":"text","title":"College Courses","payload":"college"},{"content_type":"text","title":"Senior High","payload":"sis"},{"content_type":"text","title":"Tesda Programs","payload":"tesda"},{"content_type":"text","title":"Scholarship","payload":"scholarship"}
+			bot.send_quick_replies_message(sender_id, 'We have :', quick_replies)
+		if text == "class schedule":
+			quick_replies = {"content_type":"text","title":"Current","payload":"current"},{"content_type":"text","title":"Previous","payload":"previous"}
+			bot.send_quick_replies_message(sender_id, 'What schedule?', quick_replies)
+	else:
+		x =["Im sorry, humans are complicated, I'm not trained to understand things well","Sorry, I did't quite follow that, perhaps use different words?","Sorry, I did't quite follow that, maybe use different words?"]
+		bot.send_text_message(sender_id,random.choice(x))
 #if user tap a button from a quick reply
 def received_qr(event):
 	sender_id = event["sender"]["id"]        # the facebook ID of the person sending you the message
@@ -449,7 +505,7 @@ def received_qr(event):
 		bot.send_text_message(sender_id, "These are the following Senior High Courses we offer :")
 		i= Mongo.get_program(programs,'sis')
 		if i !=None:
-			sdes = i['description']
+			sdes = i.get('description')
 			bot.send_text_message(sender_id, "Course : {}".format(sdes))
 			
 		else: 
@@ -458,7 +514,7 @@ def received_qr(event):
 		bot.send_text_message(sender_id, "These are the following Tesda Programs we offer :")
 		f = Mongo.get_program(programs,'tesda')
 		if f !=None:
-			ftes = f['description']
+			ftes = f.get('description')
 			bot.send_text_message(sender_id, "Tesda Program : {}".format(ftes))
 		else: 
 			pass
