@@ -302,12 +302,8 @@ def deeplearn(sender_id,text):
 			bot.send_quick_replies_message(sender_id, 'Get Requirements',  [{"content_type":"text","title":"Send Requirements","payload":"requirements"}])
 		if inputs == "tesda programs":
 			bot.send_text_message(sender_id, "These are the following Tesda Programs we offer :")
-			f = Mongo.get_program(programs,'tesda')
-			if f !=None:
-				ftes = f['description']
-				bot.send_text_message(sender_id, "Tesda Program : {}".format(ftes))
-			else: 
-				pass
+			bot.send_text_message(sender_id, "CSSComputer System Servicing NCIIA Tesda's Technical Vocational CourseICTInformation & Communication TechnologyA Tesda's 3 year CourseTCTComputer System Servicing NCIIA Tesda's 3 year CourseComTechComputer System Servicing NCIIA Tesda's 3 year Course")
+		
 		if inputs == "enrollment requirements":
 			bot.send_text_message(sender_id,"Please click the 'Get Requirements' button")
 			bot.send_quick_replies_message(sender_id, 'Get Requirements',  [{"content_type":"text","title":"Send Requirements","payload":"requirements"}])
@@ -495,31 +491,39 @@ def received_qr(event):
 	
 	if text == 'college':
 		bot.send_text_message(sender_id, "These are the following College Courses we offer :")
+		bot.send_text_message(sender_id, "BSCSBachelor of Science in Computer ScienceBSITBachelor of Science in Information TechnoloyBSBA MarketingBachelor of Science in Business Administration Major in Marketing ManagementBSBA FinanceBachelor of Science in Business Administration Major in Financial Management")
+		'''
 		p = Mongo.get_program(programs,'college')
 		if p !=None:
 			d = p['description']
 			bot.send_text_message(sender_id, "Course : {}".format(d))
 		else: 
 			pass
-		
+		'''
 	if text == 'sis':
 		bot.send_text_message(sender_id, "These are the following Senior High Courses we offer :")
+		bot.send_text_message(sender_id, "SADTSoftware Application & Development TechnologyGASGeneral Academic StrandSTEMScience, Technology, Engineering, and Mathematics")
+		
+		'''
 		i= Mongo.get_program(programs,'sis')
 		if i !=None:
 			sdes = i['description']
 			bot.send_text_message(sender_id, "Course : {}".format(sdes))
 			
 		else: 
-			pass
+			pass'''
 	if text == 'tesda':
 		bot.send_text_message(sender_id, "These are the following Tesda Programs we offer :")
+		bot.send_text_message(sender_id, "CSSComputer System Servicing NCIIA Tesda's Technical Vocational CourseICTInformation & Communication TechnologyA Tesda's 3 year CourseTCTComputer System Servicing NCIIA Tesda's 3 year CourseComTechComputer System Servicing NCIIA Tesda's 3 year Course")
+		
+		'''
 		f = Mongo.get_program(programs,'tesda')
 		if f !=None:
 			ftes = f['description']
 			bot.send_text_message(sender_id, "Tesda Program : {}".format(ftes))
 		else: 
 			pass
-	
+	'''
 	if text == 'yes_student':
 		
 		quick_replies = {"content_type":"text","title":"Enrollment","payload":"enrollment"},{"content_type":"text","title":"Schedule","payload":"schedule"},{"content_type":"text","title":"Account Slip","payload":"account_slip"},{"content_type":"text","title":"Exam Schedule","payload":"exam_schedule"},{"content_type":"text","title":"Scholarship","payload":"scholarship"},{"content_type":"text","title":"Others","payload":"others"}
