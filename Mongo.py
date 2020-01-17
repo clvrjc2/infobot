@@ -45,18 +45,18 @@ def get_enrollment(table, category):
     return None
 
 def get_schedule_count(table, sy, sem, std_id):
-    a = table.find({'std_id':std_id}, {'sy': sy}, {'sem':sem}).count()
+    a = table.find({'std_id':std_id,'sy': sy,'sem':sem}).count()
     if a != None:
         return a
     return None   
 def get_schedule(table, sy, sem, std_id):
-    a = table.find( {'std_id':std_id}, {'sy': sy}, {'sem':sem})
+    a = table.find( {'std_id':std_id,'sy': sy,'sem':sem})
     if a != None:
         return a
     return None   
 
 def get_slip(table, sy, sem, std_id):
-    a = table.find_one({ 'std_id':std_id}, {'sy': sy}, {'sem':sem} )
+    a = table.find_one({ 'std_id':std_id, 'sy': sy, 'sem':sem} )
     if a != None:
         return a
     return None   
