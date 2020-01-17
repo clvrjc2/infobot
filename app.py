@@ -230,11 +230,11 @@ def received_text(event):
 		if sched !=None:
 			for x in range(0,sched_count):
 				for data in sched:
-					subject = data.get("subject")
-					time = data.get("time")
-					day = data.get("day")
-					room = data.get("room")
-					ins = data.get("ins")
+					subject = data["subject"]
+					time = data["time"]
+					day = data["day"]
+					room = data["room"]
+					ins = data["ins"]
 					bot.send_text_message(sender_id,"* {} {} {} {} {} {}".format(subject, time, day, room, ins))
 					x =+1
 					if x == sched_count:
@@ -591,6 +591,8 @@ def received_postback(event):
 			
 	#Persistent Menu Buttons        
 	if payload=='start_over':
+		Mongo.set_column(users, sender_id,'last_message_ask', '')
+		Mongo.set_column(users, sender_id,'last_message_ask', '')
 		if Mongo.student_enroll(student, sender_id):
 			bot.send_text_message(sender_id, "Hi {},Welcome back!".format(first_name(sender_id)))
 			quick_replies = {"content_type":"text","title":"Enrollment","payload":"enrollment"},{"content_type":"text","title":"Schedule","payload":"schedule"},{"content_type":"text","title":"Account Slip","payload":"account_slip"},{"content_type":"text","title":"Exam Schedule","payload":"exam_schedule"},{"content_type":"text","title":"Scholarship","payload":"scholarship"},{"content_type":"text","title":"Others","payload":"others"}
