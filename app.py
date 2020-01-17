@@ -196,9 +196,6 @@ def received_text(event):
 		answer = user_data['last_message_answer']
 	else: 
 		pass
-	if text:
-		print(ask+" asdasd "+answer)
-		
 	if answer == "enrollment":
 		bot.send_text_message(sender_id, 'Just click the Send Requirements Button')
 		bot.send_quick_replies_message(sender_id, 'Get Requirements',  [{"content_type":"text","title":"Send Requirements","payload":"requirements"}])
@@ -233,11 +230,11 @@ def received_text(event):
 		if sched !=None:
 			for x in range(0,sched_count):
 				for data in sched:
-					subject = data["subject"]
-					time = data["time"]
-					day = data["day"]
-					room = data["room"]
-					ins = data["instructor"]
+					subject = data[2]
+					time = data[3]
+					day = data[4]
+					room = data[5]
+					ins = data[6]
 					bot.send_text_message(sender_id,"* {} {} {} {} {} {}".format(subject, time, day, room, ins))
 					x =+1
 					if x == sched_count:
