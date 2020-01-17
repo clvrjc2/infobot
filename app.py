@@ -282,11 +282,12 @@ def deeplearn(sender_id,text):
 	inputs = nlp.nlp(text)
 	if inputs != 'Invalid':
 		if text == "ama hymn":
-			pass
+			bot.send_text_message(sender_id,"AMA HYMN\n\n1st stanza:\nYou put us in molddear Alma Materyou hold the futurein this race against timeThrough the years in your foldswe nurture our dreamsour promise to youthe toast is for you\n\nRefrain:\n\nDear Alma Materyou have given us armsfor the battles of lifeand the conquest of our dreams\n\nOh, dear AMAyou have sharpened our mindswe will triumph by whichthe toast is for you\n\n2nd stanza:The light up aheadis victory foreseenwith noble desireswe behold its gleamour motherland laysher hopes on the youththe future that we holdis her hope that unfolds\n\n(Repeat Refrain)")
 		if text == "location":
-			pass
-		if text == "enrollment flo":
-			pass
+			bot.send_text_message(sender_id,"We are located at HDS Bldg 999, JC Aquino Ave, Butuan City")
+		if text == "enrollment flow":
+			bot.send_text_message(sender_id,fflow)
+			bot.send_text_message(sender_id,"For other matters simply click the 'start over' button in the persistent menu.")
 		if text == "aclc":
 			bot.send_text_message(sender_id,"AMA Computer Learning Center\nA member of the AMA Education System (AMAES) founded by Dr. Amable R. Aguiluz V – the father of IT education in the Philippines. Established in 1986, ACLC stands for AMA Computer Learning Center, as it was originally a computer training center offering skill-based courses on computer hardware and software. To date, ACLC remain to be a popular choice for TESDA Short Courses in the Philippines.") 
 		if text == "semester":
