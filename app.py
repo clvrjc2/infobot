@@ -228,8 +228,8 @@ def received_text(event):
 			nex = d.year + 1
 			sy = "{}-{}".format(d.year,nex)
 			sem = '1st'
-		sched = Mongo.get_schedule(schedule, str(sy), str(sem),str(text))
-		sched_count = Mongo.get_schedule_count(schedule, str(sy), str(sem), str(text))
+		sched = Mongo.get_schedule(schedule,str(text))
+		sched_count = Mongo.get_schedule_count(schedule, str(text))
 		element = []
 		if sched !=None:
 			for x in range(0,sched_count):
@@ -250,7 +250,7 @@ def received_text(event):
 			nex = d.year + 1
 			sy = "{}-{}".format(d.year,nex)
 			sem = '2nd'
-		slip = Mongo.get_slip(account_slip, sy, sem,text)
+		slip = Mongo.get_slip(account_slip,text)
 		if slip !=None:
 			bot.send_text_message(sender_id,"ACCOUNT SLIP")
 			a = "Prelim :{}\nMidterm :{}\nPrefinal :{}\nFinal :{}\nTotal :{}\nAmount Paid :{}\nBalance :{}\nOld Account :{}".format(data["prelim"], data["midterm"], data["prefinal"], data["final"], data["total"], data["amount_paid"], data["balance"], data["old_account"])
