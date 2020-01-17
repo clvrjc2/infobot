@@ -260,8 +260,6 @@ def received_text(event):
 			pass
 	else:
 		deeplearn(sender_id,text)
-		
-	deeplearn(sender_id,text)
 	'''		
 	if ask == "agree and proceed?" and answer == "see_details":
 		oneqrbtn = [{"content_type":"text","title":"🤝Agree and proceed","payload":'ready_accept'}]
