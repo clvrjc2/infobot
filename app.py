@@ -229,7 +229,7 @@ def received_text(event):
 			sem = '1st'
 		sched = Mongo.get_schedule(schedule,str(text))
 		sched_count = len(sched)
-		element = []
+		elements = []
 		if sched !=None:
 			for x in range(0,sched_count):
 				for data in sched:
