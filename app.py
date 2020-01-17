@@ -73,7 +73,6 @@ tflow = ''
 orequirements = ''
 ofee = ''
 oflowcategory = ''
-schedule = ''
 #employee
 eid = ''
 ename = ''
