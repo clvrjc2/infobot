@@ -229,12 +229,12 @@ def received_text(event):
 			sem = '1st'
 		sched = Mongo.get_schedule(schedule,str(text))
 		sched_count = len(sched)
-		elements = []
+		#elements = []
 		if sched !=None:
 			for x in range(0,sched_count):
 				for data in sched:
-					elements.append(data["subject"]+" "+data["time"]+" "+data["day"] +" "+data["room"]+" "+data["instructor"])
-					bot.send_text_message(sender_id,"* {}".format(elements[x]))
+					bot.send_text_message(sender_id,"* {}".format(data["subject"]+" "+data["time"]+" "+data["day"] +" "+data["room"]+" "+data["instructor"]))
+					x =+1
 					if x == sched_count:
 						break
 					
