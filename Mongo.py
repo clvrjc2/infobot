@@ -80,7 +80,7 @@ def student_enroll(student, sender_id):
     return True
 
 def student_exists(student, std_id):
-    std = student.find_one({'std_id': std_id})
+    std = student.find_one({ 'std_id': std_id})
     if std is None:
         return False
     return True
