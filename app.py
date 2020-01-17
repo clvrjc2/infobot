@@ -281,52 +281,52 @@ def received_text(event):
 def deeplearn(sender_id,text):
 	inputs = nlp.nlp(text)
 	if inputs != 'Invalid':
-		if text == "ama hymn":
+		if inputs == "ama hymn":
 			bot.send_text_message(sender_id,"AMA HYMN\n\n1st stanza:\nYou put us in molddear Alma Materyou hold the futurein this race against timeThrough the years in your foldswe nurture our dreamsour promise to youthe toast is for you\n\nRefrain:\n\nDear Alma Materyou have given us armsfor the battles of lifeand the conquest of our dreams\n\nOh, dear AMAyou have sharpened our mindswe will triumph by whichthe toast is for you\n\n2nd stanza:The light up aheadis victory foreseenwith noble desireswe behold its gleamour motherland laysher hopes on the youththe future that we holdis her hope that unfolds\n\n(Repeat Refrain)")
-		if text == "location":
+		if inputs  == "location":
 			bot.send_text_message(sender_id,"We are located at HDS Bldg 999, JC Aquino Ave, Butuan City")
-		if text == "enrollment flow":
+		if inputs == "enrollment flow":
 			bot.send_text_message(sender_id,fflow)
 			bot.send_text_message(sender_id,"For other matters simply click the 'start over' button in the persistent menu.")
-		if text == "aclc":
+		if inputs == "aclc":
 			bot.send_text_message(sender_id,"AMA Computer Learning Center\nA member of the AMA Education System (AMAES) founded by Dr. Amable R. Aguiluz V – the father of IT education in the Philippines. Established in 1986, ACLC stands for AMA Computer Learning Center, as it was originally a computer training center offering skill-based courses on computer hardware and software. To date, ACLC remain to be a popular choice for TESDA Short Courses in the Philippines.") 
-		if text == "semester":
+		if inputs  == "semester":
 			bot.send_text_message(sender_id,"Every semester ACLC Butuan has two semester each year")
-		if text == "per unit":
+		if inputs == "per unit":
 			bot.send_text_message(sender_id,"Per unit cost 350 exclusive for laboratory fee and etc")
 			bot.send_text_message(sender_id,"Overall tuition fee is in range between 13,000.00 upto 23,000.00 per semester")
-		if text == "tuition fee":
+		if inputs == "tuition fee":
 			bot.send_text_message(sender_id,"Overall tuition fee is in range between 13,000.00 upto 23,000.00 per semester")
-		if text == "enrollment fee":
+		if inputs == "enrollment fee":
 			bot.send_text_message(sender_id,"Enrollment fee for Freshmen, Transferee and Old/Current Student is\n1,500 - 2,500 tuition fee + 750 SSG Fee")
 			bot.send_quick_replies_message(sender_id, 'Get Requirements',  [{"content_type":"text","title":"Send Requirements","payload":"requirements"}])
-		if text == "tesda programs":
+		if inputs == "tesda programs":
 			bot.send_text_message(sender_id, "These are the following Tesda Programs we offer :")
 			f = Mongo.get_program(programs,'tesda')
 			if f !=None:
-				ftes = f.get('description')
+				ftes = f['description']
 				bot.send_text_message(sender_id, "Tesda Program : {}".format(ftes))
 			else: 
 				pass
-		if text == "enrollment requirements":
+		if inputs == "enrollment requirements":
 			bot.send_text_message(sender_id,"Please click the 'Get Requirements' button")
 			bot.send_quick_replies_message(sender_id, 'Get Requirements',  [{"content_type":"text","title":"Send Requirements","payload":"requirements"}])
-		if text == "owner":
+		if inputs == "owner":
 			bot.send_text_message(sender_id, "Due to company policy!\nWe cannot disclose those information")
-		if text == "organizational chart":
+		if inputs == "organizational chart":
 			bot.send_text_message(sender_id, "Due to company policy!\nWe cannot disclose those information")
-		if text == "balance payable":
+		if inputs == "balance payable":
 			quick_replies = {"content_type":"text","title":"Current","payload":"current_a"},{"content_type":"text","title":"Old","payload":"previous_a"}
 			bot.send_quick_replies_message(sender_id, 'What Balance?', quick_replies)
-		if text == "accounting slip":
+		if inputs == "accounting slip":
 			quick_replies = {"content_type":"text","title":"Current","payload":"current_a"},{"content_type":"text","title":"Previous","payload":"previous_a"}
 			bot.send_quick_replies_message(sender_id, 'What account slip?', quick_replies)
-		if text == "office hours":
+		if inputs == "office hours":
 			bot.send_text_message(sender_id, "We are open every weekdays from 8:00 am to 5:00pm")
-		if text == "course offer":
+		if inputs == "course offer":
 			quick_replies = {"content_type":"text","title":"College Courses","payload":"college"},{"content_type":"text","title":"Senior High","payload":"sis"},{"content_type":"text","title":"Tesda Programs","payload":"tesda"},{"content_type":"text","title":"Scholarship","payload":"scholarship"}
 			bot.send_quick_replies_message(sender_id, 'We have :', quick_replies)
-		if text == "class schedule":
+		if inputs == "class schedule":
 			quick_replies = {"content_type":"text","title":"Current","payload":"current"},{"content_type":"text","title":"Previous","payload":"previous"}
 			bot.send_quick_replies_message(sender_id, 'What schedule?', quick_replies)
 	else:
@@ -506,7 +506,7 @@ def received_qr(event):
 		bot.send_text_message(sender_id, "These are the following Senior High Courses we offer :")
 		i= Mongo.get_program(programs,'sis')
 		if i !=None:
-			sdes = i.get('description')
+			sdes = i['description']
 			bot.send_text_message(sender_id, "Course : {}".format(sdes))
 			
 		else: 
@@ -515,7 +515,7 @@ def received_qr(event):
 		bot.send_text_message(sender_id, "These are the following Tesda Programs we offer :")
 		f = Mongo.get_program(programs,'tesda')
 		if f !=None:
-			ftes = f.get('description')
+			ftes = f['description']
 			bot.send_text_message(sender_id, "Tesda Program : {}".format(ftes))
 		else: 
 			pass
