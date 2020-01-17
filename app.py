@@ -230,11 +230,11 @@ def received_text(event):
 		if sched !=None:
 			for x in range(0,sched_count):
 				for data in sched:
-					subject = data[2]
-					time = data[3]
-					day = data[4]
-					room = data[5]
-					ins = data[6]
+					subject = data.get("subject")
+					time = data.get("time")
+					day = data.get("day")
+					room = data.get("room")
+					ins = data.get("ins")
 					bot.send_text_message(sender_id,"* {} {} {} {} {} {}".format(subject, time, day, room, ins))
 					x =+1
 					if x == sched_count:
