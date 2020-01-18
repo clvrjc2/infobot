@@ -591,7 +591,7 @@ def received_postback(event):
 			
 	#Persistent Menu Buttons        
 	if payload=='start_over':
-		Mongo.set_column(users, sender_id,'last_message_ask', '')
+		Mongo.set_column(users, sender_id,'last_message_answer', '')
 		Mongo.set_column(users, sender_id,'last_message_ask', '')
 		if Mongo.student_enroll(student, sender_id):
 			bot.send_text_message(sender_id, "Hi {},Welcome back!".format(first_name(sender_id)))
