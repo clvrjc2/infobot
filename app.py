@@ -489,7 +489,7 @@ def received_qr(event):
 	
 	if text == 'college':
 		bot.send_text_message(sender_id, "These are the following College Courses we offer :")
-		bot.send_text_message(sender_id, "BSCSBachelor of Science in Computer ScienceBSITBachelor of Science in Information TechnoloyBSBA MarketingBachelor of Science in Business Administration Major in Marketing ManagementBSBA FinanceBachelor of Science in Business Administration Major in Financial Management")
+		bot.send_text_message(sender_id, "BSCS\nBachelor of Science in Computer Science\n\nBSITBachelor of Science in Information Technoloy\nBSBA MarketingBachelor of Science in Business Administration Major in Marketing Management\n\nBSBA Finance\nBachelor of Science in Business Administration Major in Financial Management")
 		'''
 		p = Mongo.get_program(programs,'college')
 		if p !=None:
@@ -500,7 +500,7 @@ def received_qr(event):
 		'''
 	if text == 'sis':
 		bot.send_text_message(sender_id, "These are the following Senior High Courses we offer :")
-		bot.send_text_message(sender_id, "SADTSoftware Application & Development TechnologyGASGeneral Academic StrandSTEMScience, Technology, Engineering, and Mathematics")
+		bot.send_text_message(sender_id, "SADT\nSoftware Application & Development Technology\n\nGAS\nGeneral Academic Strand\n\nSTEM\nScience, Technology, Engineering, and Mathematics")
 		
 		'''
 		i= Mongo.get_program(programs,'sis')
@@ -512,7 +512,7 @@ def received_qr(event):
 			pass'''
 	if text == 'tesda':
 		bot.send_text_message(sender_id, "These are the following Tesda Programs we offer :")
-		bot.send_text_message(sender_id, "CSSComputer System Servicing NCIIA Tesda's Technical Vocational CourseICTInformation & Communication TechnologyA Tesda's 3 year CourseTCTComputer System Servicing NCIIA Tesda's 3 year CourseComTechComputer System Servicing NCIIA Tesda's 3 year Course")
+		bot.send_text_message(sender_id, "CSS\nComputer System Servicing NCII\nA Tesda's Technical Vocational Course\n\nICT\nInformation & Communication Technology\nA Tesda's 3 year Course\n\nTCT\nComputer System Servicing NCII\nA Tesda's 3 year Course\n\nComTech\nComputer System Servicing NCIIA \nTesda's 3 year Course")
 		
 		'''
 		f = Mongo.get_program(programs,'tesda')
