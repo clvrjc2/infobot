@@ -5,19 +5,19 @@ ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
 bot = Bot (ACCESS_TOKEN)
 
 timestamp = datetime.strftime(datetime.now(),"%Y-%m-%d %H:%M:%S")
-def survey(survey, sender_id, image, action, intruder, notified):
+def survey(survey, image, intruder, notified,new):
     survey_insert = { 
                     'key':'Q3RN',
                     'created_at': timestamp,
                     'image':image,
-                    'action':action,
                      'intruder': intruder,
-                     'notified':notified
+                     'notified':notified,
+                     'new':new
                    }
     users.insert(user_insert)
 
-def update_survey(survey,image,action,intruder,notified)
-    survey.update({"key": "Q3RN"},{"$set":{'created_at': timestamp, 'image':image, 'action':action, 'intruder':intruder, 'notified': notified/}})                      
+def update_survey(survey,image,intruder,notified,new)
+    survey.update({"key": "Q3RN"},{"$set":{'new':new ,'created_at': timestamp, 'image':image, 'intruder':intruder, 'notified': notified}})                      
     
 
 #register user to be notified
@@ -35,9 +35,11 @@ def create_user(users, sender_id, user_fb):
                     'created_at': timestamp,
                     'first_name':user_fb['first_name'],
                     'last_name':user_fb['last_name'],
+                    'action': ''
                     'ask':''
                    }
     users.insert(user_insert)
-
-def update_student(student,std_id, name, guardian, contact, address, email):
-    student.update({"std_id": std_id},{"$set":{'name': name,'std_id':std_id, 'contact': contact,'address': address,'email': email,'guardian': guardian}})                      
+    
+def update_user(survey, sender_id, action,ask)
+    survey.update({"user_id": sender_id},{"$set":{'action':action ,'ask': ask}})                      
+ 
