@@ -22,17 +22,37 @@ bot = Bot (ACCESS_TOKEN)
 MONGO_TOKEN = os.environ['MONGO_DB']
 cluster = MongoClient(MONGO_TOKEN)
 db = cluster["Quadruped"]
+users = db["users"]
 survey = db["surveillance"]
+
+
 
 image_url = 'https://raw.githubusercontent.com/clvrjc2/infobot/master/images/'
 GREETING_RESPONSES = ["Hi", "Hey", "Hello there", "Hello", "Hi there"]
+
+#Sample input from RPI
+Mongo.survey(survey, '*_*', 'No', 'No', 'Yes')
 
 def notify():
 	#Get the image from MongoDB save from local rpi which is the quadruped
 	#bot.send_image ....
 	#qr buttons to categorize as intruder or not
-	#while true
-	
+	msgr_id = users["user_id"]
+	new = survey["new"]
+	image = survey["image"]
+	if msgr_id is not None:
+		if new is not None:
+			if new == 'Yes':
+				for m in msgr_id:
+					bot.send_text_message(m,'Face detected {}'.format(image))
+					Mongo.update_survey(survey,'','','','Yes','No')
+					
+			else:
+				pass
+		else:
+			pass
+	else:
+		pass
 
 def verify_fb_token(token_sent):
 	#take token sent by facebook and verify it matches the verify token you sent
@@ -96,10 +116,13 @@ def received_postback(event):
 	#Get started button tapped{
 	if payload=='start':
 		greet = random.choice(GREETING_RESPONSES)
-		bot.send_text_message(sender_id, "{} {}!, I'm your Quadruped Sruvey Notifier".format(greet,first_name(sender_id)))
-		quick_replies = [{"content_type":"text","title":"Yeah","payload":"sounds_good"}]
-		bot.send_quick_replies_message(sender_id, "I will notify you if theres intruder in your house.\nYou can also control me 'Quadruped' through messenger.", quick_replies)
+		if not Mongo.user_exists(users,sender_id): 
+			bot.send_text_message(sender_id, "{} {}!, I'm your Quadruped Sruvey Notifier".format(greet,first_name(sender_id)))
+			quick_replies = [{"content_type":"text","title":"Yeah","payload":"sounds_good"}]
+			bot.send_quick_replies_message(sender_id, "I will notify you if theres intruder in your house.\nYou can also control me 'Quadruped' through messenger.", quick_replies)
 		
+		else:
+			bot.send_text_message(sender_id, "Hi {} welcome back!".format(first_name(sender_id)))
 	#Persistent Menu Buttons        
 	if payload=='pm_register':
 		#Register this facebook to notify for intrustion detected.
